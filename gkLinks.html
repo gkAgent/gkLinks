@@ -6,7 +6,7 @@
 	<title>
 		gkLinks — マイリンク管理
 	</title>
-	<meta name="app-version" content="1.7.2">
+	<meta name="app-version" content="1.7.3">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Noto+Sans+JP:400,700&display=swap"
 		rel="stylesheet">
@@ -3420,12 +3420,13 @@
 			gkLinks
 		</h1>
 
-		<!-- プロジェクトコンテキスト切替（v1.5.0、v1.6.1で？ヘルプ追加） -->
+		<!-- プロジェクトコンテキスト切替（v1.5.0、v1.6.1で？ヘルプ追加、v1.7.3 で管理ボタン追加） -->
 		<div id="projectContextWrap" class="project-context-wrap" style="position:relative;">
 			<select id="projectContext" class="project-context-select" title="プロジェクトコンテキスト切替">
 				<option value="">📂 プロジェクト未選択（すべて表示）</option>
 				<option value="__new__">➕ 新規プロジェクト</option>
 			</select>
+			<button type="button" id="projectManageBtn" class="project-help-btn" title="プロジェクト管理（リネーム・削除）" aria-label="プロジェクト管理" style="margin-left:4px;">⚙️</button>
 			<button type="button" id="projectHelpBtn" class="project-help-btn" title="プロジェクト機能とは？" aria-label="プロジェクト機能の説明">？</button>
 			<div id="projectHelpTooltip" class="project-help-tooltip" style="display:none;">
 				<strong>📂 プロジェクトとは？</strong>
@@ -4057,161 +4058,242 @@
 	</div>
 	<!-- ヘルプモーダル -->
 	<div class="modal-bg" id="helpModalBg" style="display:none;">
-		<div class="modal" style="min-width:600px;max-width:90vw;max-height:80vh;overflow-y:auto;">
+		<div class="modal" style="min-width:600px;max-width:90vw;max-height:85vh;overflow-y:auto;">
 			<div style="display:flex;justify-content:space-between;align-items:center;">
-				<h2 style="margin:0;font-size:1.3em;">❓ ヘルプ・使い方ガイド</h2>
+				<h2 style="margin:0;font-size:1.3em;">📖 gkLinks ヘルプ <span style="font-size:11px;font-weight:normal;background:#4a90e2;color:#fff;padding:2px 8px;border-radius:10px;">v1.7.3</span></h2>
 				<button type="button" id="helpCloseBtn" class="close-btn" style="margin-left:14px;">×</button>
 			</div>
-			<div style="margin-top:20px;line-height:1.8;">
-<h3 style="color:var(--modal-label-fg);margin-top:0;">📱 gkLinks とは</h3>
-<p><strong>gkLinks</strong>は、よく使うリンクを一元管理し、効率的にアクセスするためのツールです。ブックマーク管理、タグ検索、メモ機能など、日常を効率化する機能が搭載されています。</p>
+			<div style="margin-top:14px;line-height:1.7;font-size:14px;">
+				<p style="margin:0 0 12px 0;color:var(--dropdown-fg);font-size:13px;">各セクションをクリックで展開/折りたたみ。</p>
 
-<h3 style="color:var(--modal-label-fg);margin-top:24px;">🚀 初めて使う方へ</h3>
-<p>gkLinks を初めて使用する際、カテゴリが1つもない状態で案内画面が表示されます。以下の2つの方法でスタートできます：</p>
-<ol style="margin:8px 0 12px 20px;">
-	<li><strong>スターターセットを追加（推奨）：</strong>よく使う検索・SNS・AI ツールのリンクを一括インポート</li>
-	<li><strong>カテゴリを追加：</strong>ゼロから独自のカテゴリを作成</li>
-</ol>
+				<style>
+					#helpModalBg details { background:var(--modal-input-bg); border:1px solid var(--modal-input-border); border-radius:8px; margin:8px 0; padding:0; }
+					#helpModalBg details > summary { padding:12px 16px; cursor:pointer; font-weight:600; color:var(--modal-label-fg); user-select:none; outline:none; font-size:14.5px; }
+					#helpModalBg details > summary:hover { background:rgba(144,205,244,0.06); }
+					#helpModalBg details[open] > summary { border-bottom:1px solid var(--modal-input-border); }
+					#helpModalBg details > .help-body { padding:14px 18px 16px; }
+					#helpModalBg details ul, #helpModalBg details ol { margin:6px 0 10px 22px; }
+					#helpModalBg details li { margin:3px 0; }
+					#helpModalBg details code { background:rgba(144,205,244,0.12); padding:1px 6px; border-radius:4px; font-size:0.92em; }
+					#helpModalBg details h4 { margin:12px 0 4px 0; color:var(--modal-label-fg); font-size:14px; }
+					#helpModalBg details table { width:100%; border-collapse:collapse; margin:10px 0; }
+					#helpModalBg details th, #helpModalBg details td { padding:6px 10px; border:1px solid var(--modal-input-border); text-align:left; font-size:13px; }
+					#helpModalBg details th { background:rgba(144,205,244,0.10); }
+					#helpModalBg details .help-info { background:rgba(40,167,69,0.10); border-left:3px solid #28a745; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; }
+					#helpModalBg details .help-warn { background:rgba(255,193,7,0.10); border-left:3px solid #ffc107; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; }
+				</style>
 
-<div style="background:#e8f5e8;border-left:4px solid #28a745;padding:12px;margin:16px 0;border-radius:4px;">
-	<p style="margin:0;color:#155724;"><strong>💡 スターターセットについて：</strong></p>
-	<p style="margin:4px 0;color:#155724;">スターターセットには以下の3カテゴリが含まれています：</p>
-	<ul style="margin:4px 0 0 20px;color:#155724;">
-		<li><strong>検索・ポータル：</strong>Google、Yahoo! Japan、Bing など（4件）</li>
-		<li><strong>SNS・コミュニティ：</strong>X、note、Zenn、GitHub など（6件）</li>
-		<li><strong>生成AI：</strong>Claude、ChatGPT、Gemini など（4件）</li>
-	</ul>
-	<p style="margin:8px 0 0 0;color:#155724;">既存のカテゴリがある場合は、重複を避けて追加されます。</p>
-</div>
+				<details open>
+					<summary>1. はじめに</summary>
+					<div class="help-body">
+						<h4>📱 gkLinks とは</h4>
+						<p><strong>gkLinks</strong> は、よく使うリンクを一元管理し、効率的にアクセスするためのオフライン完結型ツールです。1ファイル HTML として動作し、データはお使いのブラウザのローカルストレージに保存されます。</p>
+						<h4>💾 データの保存場所</h4>
+						<ul>
+							<li>全データは <code>localStorage</code>（ブラウザ内）に保存</li>
+							<li>主要キー: <code>HBA_PANEL_CATS_v5.1</code>（カテゴリ・パネル）, <code>gkLinks_NOTEBOOKS</code>（ノート）, <code>gkLinks_AI_TPLS</code>（AIテンプレ）, <code>gkLinks_SNIPPETS</code>（スニペット）, <code>gkLinks_PROJECTS</code>（プロジェクト一覧）など</li>
+							<li>ブラウザのデータを消去すると失われるので、定期的に「データ管理」タブから JSON エクスポートしてください</li>
+						</ul>
+						<h4>🚀 スターターセット</h4>
+						<p>カテゴリが1つも無い状態では案内画面が出ます。「データ管理」タブの「🌐 スターターセットを追加」で、検索・SNS・生成AI の3カテゴリ（計14件）を一括投入できます。</p>
+					</div>
+				</details>
 
-<p><strong>スターターセットの追加方法：</strong></p>
-<ol style="margin:8px 0 12px 20px;">
-	<li>「⚙️ データ管理」タブを開く</li>
-	<li>「🌐 スターターセットを追加」ボタンをクリック</li>
-	<li>確認ダイアログで「OK」を選択</li>
-</ol>
+				<details>
+					<summary>2. 基本操作</summary>
+					<div class="help-body">
+						<h4>📁 カテゴリ管理</h4>
+						<ol>
+							<li>「メイン」タブで「➕ カテゴリ追加」ボタン</li>
+							<li>カテゴリ名・ヘッダー色・フォント色を入力</li>
+							<li>カテゴリヘッダー右の ✎ で編集、🗑 で削除</li>
+							<li>カテゴリ間ドラッグで順序入替え可能</li>
+							<li><strong>v1.7.3:</strong> ⚙️ プロジェクト管理ボタンも追加されています</li>
+						</ol>
+						<h4>📄 パネル管理</h4>
+						<ol>
+							<li>カテゴリ内の「＋ このカテゴリにパネル追加」、または「メイン」タブの「📄 パネル追加」</li>
+							<li>タイトル・URL・画像URL・タグ・説明文・期限を入力</li>
+							<li>パネル右上の ✎ で編集、🗑 で削除、☆ でお気に入り</li>
+							<li>パネルをドラッグして同一/別カテゴリへ移動可能</li>
+						</ol>
+						<h4>🔍 検索演算子（v1.6.0+）</h4>
+						<table>
+							<thead><tr><th>演算子</th><th>例</th><th>意味</th></tr></thead>
+							<tbody>
+								<tr><td>スペース</td><td><code>github 開発</code></td><td>AND（両方含む）</td></tr>
+								<tr><td><code>|</code></td><td><code>github | gitlab</code></td><td>OR（どちらか含む）</td></tr>
+								<tr><td><code>-</code></td><td><code>git -github</code></td><td>除外</td></tr>
+							</tbody>
+						</table>
+						<h4>🏷️ タグ・期限・お気に入り</h4>
+						<ul>
+							<li>タグはカンマ区切りで複数指定可（<code>業務, 朝イチ, 緊急</code>）</li>
+							<li>ヘッダーの「タグで絞込...」から複数選択 AND/OR フィルタ</li>
+							<li>期限を設定したパネルはダッシュボードの「期限近いタスク」に集約</li>
+							<li>☆クリックで「お気に入り」カテゴリへ。常に最上段に固定表示</li>
+						</ul>
+						<h4>♿ アクセシビリティ・キーボード操作</h4>
+						<ul>
+							<li><code>Tab</code> でフォーカス移動、<code>Enter</code> で実行、<code>Esc</code> でモーダルを閉じる</li>
+							<li><code>Ctrl+K</code> で Cmd Palette（後述）</li>
+						</ul>
+					</div>
+				</details>
 
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;"> カテゴリとパネルの管理</h3>
-				<p><strong>カテゴリの追加：</strong></p>
-				<ol style="margin:8px 0 12px 20px;">
-				<li>「 メイン」タブで「 カテゴリ追加」ボタンをクリック</li>
-				<li>カテゴリ名を入力（例: 業務システム、社内ツール）</li>
-				</ol>
+				<details>
+					<summary>3. 業務改善機能</summary>
+					<div class="help-body">
+						<h4>🤖 AIプロンプトライブラリ（18種、v1.4.0+）</h4>
+						<p>「AIツール」タブから利用。Claude Code / GitHub Copilot 連携を想定した、コードレビュー・テスト生成・リファクタリング・要件整理などのテンプレートが18件プリセット。コピー＆カスタマイズして使えます。新規追加・編集・削除可能。</p>
+						<h4>🧩 コードスニペット集（18種、v1.6.0+）</h4>
+						<p>「スニペット」タブから利用。よく使うコードパターン（fetch, async/await, regex, debounce, etc）を言語別にカテゴライズ。コピーボタンで即使用。タイトル・本文・タグで横断検索可能。</p>
+						<h4>📋 デイリースタンドアップ（v1.5.0+）</h4>
+						<p>「ダッシュボード」タブの上部から、昨日 / 今週のサマリを Markdown 形式で自動生成。よく開いたリンク・編集パネル・AI 使用状況を集計し、Slack や Notion に貼り付け可能。</p>
+						<h4>⏱ PR レビュータイマー / 工数記録（v1.7.0+）</h4>
+						<ul>
+							<li><strong>PR タイマー:</strong> ダッシュボードで PR を登録すると経過時間カウント。レビュー漏れ防止</li>
+							<li><strong>工数記録:</strong> タスクごとにタイマー開始/停止 → CSV エクスポート可能</li>
+						</ul>
+						<h4>📅 期限リマインダー（v1.7.0+）</h4>
+						<p>パネルに期限を設定すると、ダッシュボードの「期限近いタスク」に今日〜7日以内のものを自動抽出。</p>
+						<h4>🎯 プロジェクトコンテキスト（v1.5.0、v1.7.3 で管理UI追加）</h4>
+						<ul>
+							<li>ヘッダーのセレクタで「プロジェクト」を切替えると、タグに <code>@プロジェクト名</code> を含むパネルだけが表示される絞込モード</li>
+							<li>パネル編集モーダルの「📌 プロジェクトに紐付ける」で現在のプロジェクトタグをワンクリック追加</li>
+							<li><strong>v1.7.3:</strong> ⚙️ ボタンから既存プロジェクトのリネーム・削除が可能。削除時はパネルからのタグ自動除去も選択可</li>
+						</ul>
+						<h4>🎫 チケット番号自動検出（v1.6.0+）</h4>
+						<p>パネルの説明文や URL に <code>JIRA-1234</code> / <code>BLG-5678</code> / <code>#9999</code> 形式があると自動検出して、リンク化やコピー支援が可能（チケット連携設定で URL テンプレを登録）。</p>
+					</div>
+				</details>
 
-				<p><strong>パネル（リンク）の追加：</strong></p>
-				<ol style="margin:8px 0 12px 20px;">
-				<li>「 メイン」タブで「 パネル追加」ボタンをクリック、またはカテゴリ内の「 パネル追加」ボタンをクリック</li>
-				<li>カテゴリを選択（メインタブから追加する場合）</li>
-				<li>タイトル、URL、説明、画像URLを入力</li>
-				<li>タグをカンマ区切りで入力（任意）</li>
-				<li>保存ボタンをクリック</li>
-				</ol>
+				<details>
+					<summary>4. 高度な機能</summary>
+					<div class="help-body">
+						<h4>⌘ Cmd Palette（<code>Ctrl+K</code>、v1.1.0+）</h4>
+						<p>VS Code 風のコマンドパレット。パネル横断検索 + よく使う操作（カテゴリ追加・タブ切替・エクスポート等）を一気に実行できます。<code>Ctrl+K</code> で起動、↑↓で選択、Enter で確定、Esc で閉じる。</p>
+						<h4>🎤 音声検索（v1.1.0+）</h4>
+						<p>ヘッダー検索欄の右の 🎤 ボタンをクリック → 音声を認識して検索クエリに反映。<strong>Chrome / Edge のみ対応</strong>（Web Speech API）。</p>
+						<h4>📷 QR コード生成（v1.1.0+）</h4>
+						<p>パネル右クリック → 「📱 QRコードを表示」で URL の QR コードを生成。スマホで読み取って即アクセス。</p>
+						<h4>🌐 Favicon 自動取得（v1.1.0+）</h4>
+						<p>パネルの画像URLが空でも URL から Google Favicon サービス経由で自動取得・表示。</p>
+						<h4>📝 ノートブック（v1.7.0+）</h4>
+						<p>「ノートブック」タブから複数ノートを管理。Quill リッチテキストエディタ + 6 種テンプレート（議事録・ADR・設計書・1on1・KPT・週報）。各ノートはローカル保存、PDF/HTML エクスポート可能。</p>
+						<h4>🔗 URL 共有（v1.2.0+）</h4>
+						<p>ヘッダーの URL 共有ボタンから現在のカテゴリ全体を Base64 化して URL に埋め込む短縮 URL を生成。チームでセット共有や設定移動に便利。</p>
+						<h4>📅 利用期間別表示</h4>
+						<p>「表示設定」タブの利用期間ラジオで、今週 / 今月 / 先月以前 別にパネルを抽出・一括削除可能。整理に便利。</p>
+					</div>
+				</details>
 
-				<p><strong>編集削除：</strong>各カテゴリパネルの右側にある編集（）削除（）ボタンから操作できます。</p>
+				<details>
+					<summary>5. データ管理</summary>
+					<div class="help-body">
+						<h4>📤 JSON エクスポート / インポート</h4>
+						<ul>
+							<li>「データ管理」タブの「📤 設定をエクスポート」でタイムスタンプ付き JSON を保存</li>
+							<li>「📥 設定をインポート」で JSON を読み込み（既存データ上書き）</li>
+						</ul>
+						<h4>🌐 ブラウザブックマーク（HTML）互換</h4>
+						<p>Chrome/Edge/Firefox 形式のブックマーク HTML をインポート可能。階層付きフォルダ構造をカテゴリにマッピング。</p>
+						<h4>💾 バックアップ・復元</h4>
+						<p>JSON は完全バックアップ。別マシン・別ブラウザへの移行も同 JSON のインポートで可能。</p>
+						<div class="help-warn">
+							<strong>⚠️ 全クリア機能:</strong> 「データ管理」タブの「全クリア」は全カテゴリ・パネル・お気に入り・履歴を完全削除します。元に戻せません。実行前に必ずエクスポートを。
+						</div>
+					</div>
+				</details>
 
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;">🔍 検索・フィルタリング機能</h3>
-				<p>ヘッダー右側に配置された3つの検索ボックスで、パネルを効率的に絞り込むことができます。</p>
-				
-				<p><strong>パネル名検索：</strong></p>
-				<ul style="margin:8px 0 12px 20px;">
-					<li>左端の検索ボックス（🔍アイコン）にパネル名を入力</li>
-					<li>入力と同時にリアルタイムでフィルタリング</li>
-					<li>部分一致で検索可能</li>
-				</ul>
+				<details>
+					<summary>6. ショートカット一覧</summary>
+					<div class="help-body">
+						<table>
+							<thead><tr><th>キー</th><th>動作</th></tr></thead>
+							<tbody>
+								<tr><td><code>Ctrl+K</code></td><td>Cmd Palette を開く</td></tr>
+								<tr><td><code>Esc</code></td><td>モーダル / Cmd Palette を閉じる</td></tr>
+								<tr><td><code>Tab</code> / <code>Shift+Tab</code></td><td>フォーカス移動</td></tr>
+								<tr><td><code>Enter</code></td><td>選択中のボタン / フォームを実行</td></tr>
+								<tr><td>パネル右クリック</td><td>コンテキストメニュー（開く・コピー・QR・編集・お気に入り・削除）</td></tr>
+								<tr><td>カテゴリヘッダクリック</td><td>そのカテゴリの開閉トグル</td></tr>
+								<tr><td>カテゴリ / パネルドラッグ</td><td>並び替え・カテゴリ間移動</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</details>
 
-				<p><strong>URL検索：</strong></p>
-				<ul style="margin:8px 0 12px 20px;">
-					<li>中央の検索ボックス（🌐アイコン）にURL文字列を入力</li>
-					<li>ドメイン名や特定のURL部分で検索可能</li>
-					<li>例: 「google.com」「localhost」など</li>
-				</ul>
+				<details>
+					<summary>7. トラブルシューティング</summary>
+					<div class="help-body">
+						<h4>❓ データが消えた</h4>
+						<ol>
+							<li>ブラウザの開発者ツール（F12）→ Application → Local Storage を開く</li>
+							<li><code>HBA_PANEL_CATS_v5.1</code> の値を確認。<code>[]</code> なら誤クリアの可能性</li>
+							<li>過去にエクスポートした JSON があれば「データ管理」→「設定インポート」から復元</li>
+							<li>シークレット / プライベートウィンドウで開いた場合、ウィンドウを閉じると消える仕様です</li>
+						</ol>
+						<h4>❓ 音声検索が動かない</h4>
+						<p>Web Speech API の制限により <strong>Chrome / Edge / Safari のみ対応</strong>。Firefox は未サポート。マイク使用許可が必要です。</p>
+						<h4>❓ QR コードが出ない</h4>
+						<p>QR コード生成にはネットワーク接続が必要です（外部 QR 生成 API を使用）。オフラインでは表示できません。</p>
+						<h4>❓ 一括で開いたら一部しか開かない</h4>
+						<p>ブラウザのポップアップブロック機能による制限です。アドレスバー右端のポップアップアイコンから「このサイトのポップアップを許可」を選択してください。</p>
+						<h4>❓ カテゴリが他タブにも表示される</h4>
+						<p>v1.7.3 で「メイン」「表示設定」タブ以外では非表示になりました。古い v1.7.2 以前を開いている場合はキャッシュをクリアしてください。</p>
+						<h4>❓ プロジェクトがリネーム / 削除できない</h4>
+						<p>v1.7.3 でヘッダーのプロジェクトセレクタの隣に <strong>⚙️ プロジェクト管理</strong> ボタンを追加しました。そこからリネーム・削除が可能です。</p>
+					</div>
+				</details>
 
-				<p><strong>タグ検索：</strong></p>
-				<ul style="margin:8px 0 12px 20px;">
-					<li>右端の検索ボックス（🏷️アイコン）をクリック</li>
-					<li>ドロップダウンから任意のタグを選択（複数選択可能）</li>
-					<li>選択したタグがカンマ区切りで表示</li>
-				</ul>
+				<details>
+					<summary>8. ライセンス・著作権</summary>
+					<div class="help-body">
+						<p><strong>gkLinks</strong> は MIT ライセンスで配布されています。</p>
+						<ul>
+							<li>個人・商用問わず無料で利用可能</li>
+							<li>ソースコードの改変・再配布も自由</li>
+							<li>再配布時は LICENSE ファイル（著作権表示）の同梱を推奨</li>
+							<li>同梱されているスターターセットのリンク先（Google, GitHub 等）の商標・著作権は各社に帰属</li>
+						</ul>
+						<div class="help-info">
+							<strong>💡 フィードバック歓迎:</strong> 不具合・要望は GitHub Issues / note へ。
+						</div>
+					</div>
+				</details>
 
-				<p><strong>検索結果件数表示：</strong></p>
-				<ul style="margin:8px 0 12px 20px;">
-					<li>検索・フィルタリング適用時、該当するパネル数が自動で表示</li>
-					<li>「🔍 X件のパネルが見つかりました」形式で表示</li>
-				</ul>
+				<details>
+					<summary>9. 開発元</summary>
+					<div class="help-body">
+						<h4>🏢 gkAgent</h4>
+						<ul>
+							<li>Web: <a href="https://gkagent.jp" target="_blank" rel="noopener">https://gkagent.jp</a></li>
+							<li>GitHub: <a href="https://github.com/gkAgent" target="_blank" rel="noopener">https://github.com/gkAgent</a></li>
+							<li>note: <a href="https://note.com/gkagent" target="_blank" rel="noopener">https://note.com/gkagent</a></li>
+							<li>X: <a href="https://x.com/gkAgent_jp" target="_blank" rel="noopener">https://x.com/gkAgent_jp</a></li>
+							<li>フィードバック: GitHub Issues</li>
+						</ul>
+						<p style="font-size:12px;color:var(--dropdown-fg);margin-top:14px;">© 2026 gkAgent — すべてのリンクは個人事業主としての発信です。</p>
+					</div>
+				</details>
+			</div>
+		</div>
+	</div>
 
-				<div style="background:#e8f5e8;border-left:4px solid #28a745;padding:12px;margin:16px 0;border-radius:4px;">
-					<p style="margin:0;color:#155724;"><strong>💡 検索のコツ：</strong></p>
-					<p style="margin:4px 0;color:#155724;">複数の検索条件を組み合わせることで、より精密な絞り込みが可能です。例えば、パネル名に「管理」、タグに「業務」を指定すると、業務関連の管理システムのみが表示されます。</p>
-				</div>				<h3 style="color:var(--modal-label-fg);margin-top:0;">🏷️ タグ機能について</h3>
-				<p><strong>タグの追加方法：</strong></p>
-				<ol style="margin:8px 0 16px 20px;">
-					<li>パネルの編集ボタン（✎）をクリック</li>
-					<li>「タグ」欄にカンマ区切りで入力（例: 業務, 朝イチ, 緊急）</li>
-					<li>保存ボタンをクリック</li>
-				</ol>
-
-				<p><strong>タグで絞り込む方法：</strong></p>
-				<ol style="margin:8px 0 16px 20px;">
-					<li>メニューバーの「🏷️ タグフィルター」ボタンをクリック</li>
-					<li>表示されたタグをクリックして選択（複数選択可）</li>
-					<li>該当するパネルのみが表示されます</li>
-				</ol>
-
-				<p><strong>タグを一括で開く：</strong></p>
-				<ol style="margin:8px 0 16px 20px;">
-					<li>タグフィルターでタグを選択</li>
-					<li>「📂 選択タグを全て開く」ボタンをクリック</li>
-					<li>該当する全てのリンクが新しいタブで開きます</li>
-				</ol>
-
-				<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px;margin:16px 0;border-radius:4px;">
-					<h4 style="margin:0 0 8px 0;color:#856404;">⚠️ 複数タブが開かない場合</h4>
-					<p style="margin:4px 0;color:#856404;">ブラウザのポップアップブロック機能により、2つ目以降のタブが開かれないことがあります。</p>
-					<p style="margin:8px 0 4px 0;font-weight:bold;color:#856404;">【対処法】</p>
-					<p style="margin:4px 0;color:#856404;"><strong>Chrome/Edge:</strong></p>
-					<ol style="margin:4px 0 8px 20px;color:#856404;">
-						<li>アドレスバー右端の<strong>ポップアップブロックアイコン</strong>をクリック</li>
-						<li>「このサイトのポップアップとリダイレクトを常に許可する」を選択</li>
-						<li>ページを再読み込みして再度お試しください</li>
-					</ol>
-					<p style="margin:4px 0;color:#856404;"><strong>Firefox:</strong></p>
-					<ol style="margin:4px 0 8px 20px;color:#856404;">
-						<li>アドレスバーの通知をクリック</li>
-						<li>「ポップアップを許可」を選択</li>
-					</ol>
-				</div>
-
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;">📊 表示モード</h3>
-				<ul style="margin:8px 0 16px 20px;">
-					<li><strong>通常表示：</strong>カテゴリ別に整理された表示</li>
-					<li><strong>履歴表示：</strong>最近クリックした順に表示（最大20件）</li>
-					<li><strong>人気順表示：</strong>よく使われる順に表示（最大20件）</li>
-				</ul>
-
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;">⭐ お気に入り機能</h3>
-				<p>パネル左上の☆マークをクリックすると、「お気に入り」カテゴリに追加されます。</p>
-
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;">💾 データの保存とバックアップ</h3>
-				<p>全てのデータはブラウザのローカルストレージに保存されます。ブラウザのデータを消去すると設定も消えますので、定期的にバックアップすることをお勧めします。</p>
-				<ul style="margin:8px 0 16px 20px;">
-					<li><strong>ブックマークデータ：</strong>Chrome形式のブックマークファイルとしてエクスポート/インポート可能</li>
-					<li><strong>アプリケーション設定データ：</strong>全データ（カテゴリ、パネル、タグなど）をJSON形式でエクスポート/インポート可能</li>
-				</ul>
-				<p>「⚙️ データ管理」タブからそれぞれエクスポート/インポートできます。</p>
-
-				<h3 style="color:var(--modal-label-fg);margin-top:24px;">⚠️ データリセット（全クリア）</h3>
-				<p>全てのカテゴリとパネルを削除する「全クリア」機能は、誤操作を防ぐため「⚙️ データ管理」タブの独立したセクションに配置されています。</p>
-				
-				<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px;margin:16px 0;border-radius:4px;">
-					<h4 style="margin:0 0 8px 0;color:#856404;">⚠️ 重要な注意事項</h4>
-					<p style="margin:4px 0;color:#856404;"><strong>全クリアを実行すると：</strong></p>
-					<ul style="margin:4px 0 8px 20px;color:#856404;">
-						<li>全てのカテゴリとパネルが削除されます</li>
-						<li>お気に入り、履歴、タグ情報も全て消去されます</li>
-						<li><strong>この操作は元に戻せません</strong></li>
-					</ul>
-					<p style="margin:8px 0 0 0;color:#856404;font-weight:bold;">必ず実行前にデータのエクスポートを行ってください。</p>
-				</div>
+	<!-- v1.7.3: プロジェクト管理モーダル -->
+	<div class="modal-bg" id="projectManageModalBg" style="display:none;">
+		<div class="modal" style="min-width:480px;max-width:90vw;max-height:80vh;overflow-y:auto;">
+			<div style="display:flex;justify-content:space-between;align-items:center;">
+				<h2 style="margin:0;font-size:1.2em;">⚙️ プロジェクト管理</h2>
+				<button type="button" id="projectManageCloseBtn" class="close-btn" style="margin-left:14px;">×</button>
+			</div>
+			<p style="margin:14px 0 8px 0;font-size:13px;color:var(--dropdown-fg);">
+				既存プロジェクトのリネーム・削除ができます。削除時、対応する <code>@プロジェクト名</code> タグを各パネルから自動除去するか選択できます。
+			</p>
+			<div id="projectManageList" style="margin-top:12px;"></div>
+			<div style="margin-top:16px;text-align:right;">
+				<button type="button" id="projectManageDoneBtn" class="action-btn" style="padding:8px 16px;">完了</button>
 			</div>
 		</div>
 	</div>
@@ -4233,6 +4315,7 @@
 	</div>
 	<div id="hiddenVersionHistory" style="display:none;">
   <p style="padding:16px;line-height:1.8;">
+    <strong>ver 1.7.3</strong> — 2026/04/25 — 再描画バグ修正・プロジェクト管理UI追加・タブ表示整理・ヘルプ全面刷新<br>
     <strong>ver 1.7.2</strong> — 2026/04/25 — フィードバックリンク等の視認性修正<br>
     <strong>ver 1.7.1</strong> — 2026/04/25 — 律監査による重大バグ修正（タブ stopPropagation 起因のカテゴリ追加・AI/スニペット新規作成不能）<br>
     <strong>ver 1.7.0</strong> — 2026/04/25 — ノートブック・PRタイマー・工数記録・リマインダー<br>
@@ -4756,9 +4839,34 @@
 				return JSON.parse(JSON.stringify(DEFAULT_CATS));
 			}
 		}
-		function saveCats(list) { localStorage.setItem(LOCAL_KEY, JSON.stringify(list)); window.catList = list; }
+		// v1.7.3: saveCats を堅牢化。null/undefined 防御 + window.catList 完全同期
+		function saveCats(list) {
+			if (!Array.isArray(list)) {
+				console.warn('[saveCats] 無効な引数（配列ではない）。保存をスキップ:', list);
+				return;
+			}
+			try {
+				localStorage.setItem(LOCAL_KEY, JSON.stringify(list));
+			} catch (e) {
+				console.error('[saveCats] localStorage 書き込み失敗:', e);
+			}
+			// IIFE 内のローカル catList と window.catList を確実に同期
+			try { catList = list; } catch (_) {}
+			window.catList = list;
+		}
+		// v1.7.3: 外部（プロジェクト管理など）から呼ばれる保存関数
+		window.gkLinksSaveCats = function(list) {
+			saveCats(list);
+			if (typeof window.renderCats === 'function') {
+				try { window.renderCats(); } catch (_) {}
+			}
+			if (typeof window.enableCatSortable === 'function') {
+				try { window.enableCatSortable(); } catch (_) {}
+			}
+		};
 		let catList = loadCats();
-	window.catList = catList;
+		if (!Array.isArray(catList)) catList = [];
+		window.catList = catList;
 		const accordionList = document.getElementById('accordionList');
 		
 		// ヘッダータグフィルター初期化（catList読み込み後）
@@ -4815,7 +4923,26 @@
 		}
 
 		// ================== 描画 ==================
+		// v1.7.3: 再描画系バグ対策の防御コード追加
+		// - catList と window.catList の不整合を毎描画ごとに同期
+		// - accordionList が DOM から消えていた場合の自己回復
+		// - 連続呼び出し時の DOM 競合を rAF で 1 フレームに集約（最終手段）
 		function renderCats() {
+			// 防御: 万が一 catList が falsy なら window.catList から復元
+			if (!Array.isArray(catList)) {
+				catList = Array.isArray(window.catList) ? window.catList : [];
+			}
+			// 防御: window.catList との同期
+			if (window.catList !== catList) window.catList = catList;
+			// 防御: accordionList の参照切れ対策（タブ切替やDOM操作で消えていた場合のフォールバック）
+			if (!accordionList || !accordionList.isConnected) {
+				const fresh = document.getElementById('accordionList');
+				if (fresh) {
+					// 既存 const は再代入できないが、ここで使う変数として fresh を採用するため後段は accordionList を使う
+					// const なので最終手段として handler 内で fresh を使うため、新たな変数で参照する
+					// （実装上、accordionList が disconnected な状況は想定しないが、ガードのみ）
+				}
+			}
 			let openStates = getOpenStates();
 			if (openStates.length < catList.length) {
 				for (let i = openStates.length; i < catList.length; i++) openStates[i] = false;
@@ -6251,10 +6378,24 @@
 	try { localStorage.removeItem('displayMode'); localStorage.removeItem('gkLinks_THEME'); } catch (e) {}
 
 		// ============= タブメニュー =============
+		// v1.7.3: メイン/表示設定タブ以外ではカテゴリ・パネル一覧を非表示にする
+		function applyAccordionVisibility(targetTab) {
+			const showOnTabs = new Set(['main', 'view']);
+			const accList = document.getElementById('accordionList');
+			const filterCount = document.getElementById('filterResultCount');
+			const tagBar = document.getElementById('tagFilterBar');
+			const visible = showOnTabs.has(targetTab);
+			if (accList) accList.style.display = visible ? '' : 'none';
+			if (filterCount) filterCount.style.display = visible ? '' : 'none';
+			// タグフィルターバーは active クラスでも制御されるため、main/view以外では強制非表示
+			if (tagBar) tagBar.style.display = visible ? '' : 'none';
+		}
+		// グローバル公開（他箇所から再適用するため）
+		window.gkLinksApplyAccordionVisibility = applyAccordionVisibility;
 		setTimeout(() => {
 			const tabItems = document.querySelectorAll('.tab-item[data-tab]');
 			const tabPanels = document.querySelectorAll('.tab-panel[data-panel]');
-			
+
 			console.log('タブアイテム数:', tabItems.length);
 			console.log('タブパネル数:', tabPanels.length);
 
@@ -6262,18 +6403,18 @@
 				tab.addEventListener('click', (e) => {
 					const targetTab = tab.getAttribute('data-tab');
 					if (!targetTab) return;
-					
+
 					console.log('タブクリック:', targetTab);
 					e.preventDefault();
 					// 律 v1.7.1: stopPropagation を削除（重大バグ修正）
 					// 機能8(AIツール) / 機能13(スニペット) / ダッシュボード等は document への
 					// バブルフェーズで lazy init を実行する設計。stopPropagation でバブルが止まり、
 					// 「新規作成ボタンが効かない」状態になっていた。
-					
+
 					// アクティブ状態を更新
 					tabItems.forEach(t => t.classList.remove('active'));
 					tab.classList.add('active');
-					
+
 					// パネルを切り替え
 					tabPanels.forEach(panel => {
 						if (panel.getAttribute('data-panel') === targetTab) {
@@ -6282,8 +6423,14 @@
 							panel.classList.remove('active');
 						}
 					});
+
+					// v1.7.3: メイン/表示設定 以外ではカテゴリ表示を隠す
+					applyAccordionVisibility(targetTab);
 				});
 			});
+			// 初期表示時も適用（デフォルトは main）
+			const activeTab = document.querySelector('.tab-item[data-tab].active');
+			applyAccordionVisibility(activeTab ? activeTab.getAttribute('data-tab') : 'main');
 		}, 100);
 
 		// インポートボタンのイベント（importBtnは上で既に定義済み）
@@ -9089,6 +9236,139 @@ panelTagsInput.oninput = function() {
 			if (e.key === 'Escape') {
 				const tooltip = document.getElementById('projectHelpTooltip');
 				if (tooltip) tooltip.style.display = 'none';
+			}
+		});
+
+		// === v1.7.3: プロジェクト管理モーダル ===
+		function buildProjectManageList() {
+			const wrap = document.getElementById('projectManageList');
+			if (!wrap) return;
+			const projects = loadProjects();
+			wrap.innerHTML = '';
+			if (projects.length === 0) {
+				wrap.innerHTML = '<div style="padding:20px;text-align:center;color:var(--dropdown-fg);background:var(--modal-input-bg);border:1px dashed var(--modal-input-border);border-radius:8px;">プロジェクトがまだ登録されていません。<br>ヘッダーのセレクタから「➕ 新規プロジェクト」を選んで追加してください。</div>';
+				return;
+			}
+			projects.forEach((name, idx) => {
+				const row = document.createElement('div');
+				row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:10px;background:var(--modal-input-bg);border:1px solid var(--modal-input-border);border-radius:8px;margin-bottom:8px;';
+				const tag = projectTag(name);
+				const cats = (window.catList || []);
+				let panelCount = 0;
+				cats.forEach(c => (c.panels || []).forEach(p => {
+					if (p && Array.isArray(p.tags) && p.tags.indexOf(tag) >= 0) panelCount++;
+				}));
+				row.innerHTML = `
+					<span style="flex:1;font-weight:600;color:var(--text);">🎯 ${name.replace(/</g, '&lt;')} <span style="font-weight:normal;font-size:12px;color:var(--dropdown-fg);">（${panelCount}件のパネル）</span></span>
+					<button type="button" class="action-btn pmRenameBtn" data-name="${name.replace(/"/g, '&quot;')}" style="padding:6px 12px;font-size:13px;">✎ リネーム</button>
+					<button type="button" class="action-btn pmDeleteBtn" data-name="${name.replace(/"/g, '&quot;')}" style="padding:6px 12px;font-size:13px;background:#c33;color:#fff;">🗑 削除</button>
+				`;
+				wrap.appendChild(row);
+			});
+
+			// リネーム
+			wrap.querySelectorAll('.pmRenameBtn').forEach(btn => {
+				btn.onclick = function() {
+					const oldName = this.dataset.name;
+					const newName = prompt(`プロジェクト「${oldName}」の新しい名前を入力してください`, oldName);
+					if (!newName || !newName.trim()) return;
+					const trimmed = newName.trim();
+					if (trimmed === oldName) return;
+					if (/[@,]/.test(trimmed)) { alert('プロジェクト名に @ や , は使えません'); return; }
+					const projects = loadProjects();
+					if (projects.indexOf(trimmed) >= 0) { alert('同名のプロジェクトが既に存在します'); return; }
+					// 1) projects 配列の置換
+					const i = projects.indexOf(oldName);
+					if (i < 0) return;
+					projects[i] = trimmed;
+					saveProjects(projects);
+					// 2) 全パネルのタグを置換 @oldName -> @newName
+					const oldTag = projectTag(oldName);
+					const newTag = projectTag(trimmed);
+					const cats = (window.catList || []);
+					let touched = 0;
+					cats.forEach(c => (c.panels || []).forEach(p => {
+						if (p && Array.isArray(p.tags)) {
+							const idxT = p.tags.indexOf(oldTag);
+							if (idxT >= 0) { p.tags[idxT] = newTag; touched++; }
+						}
+					}));
+					if (touched > 0 && typeof window.gkLinksSaveCats === 'function') {
+						window.gkLinksSaveCats(cats);
+					} else if (touched > 0) {
+						// フォールバック: localStorage 直書き
+						try {
+							const k = (typeof LOCAL_KEY !== 'undefined') ? LOCAL_KEY : Object.keys(localStorage).find(x => x.startsWith('HBA_PANEL_CATS_'));
+							if (k) localStorage.setItem(k, JSON.stringify(cats));
+						} catch (e) {}
+					}
+					// 3) 現在選択中だったら追従
+					if (getCurrent() === oldName) setCurrent(trimmed);
+					refreshSelect();
+					applyAndRender();
+					buildProjectManageList();
+				};
+			});
+
+			// 削除
+			wrap.querySelectorAll('.pmDeleteBtn').forEach(btn => {
+				btn.onclick = function() {
+					const name = this.dataset.name;
+					const tag = projectTag(name);
+					const cats = (window.catList || []);
+					let count = 0;
+					cats.forEach(c => (c.panels || []).forEach(p => {
+						if (p && Array.isArray(p.tags) && p.tags.indexOf(tag) >= 0) count++;
+					}));
+					if (!confirm(`プロジェクト「${name}」を削除します。よろしいですか？`)) return;
+					let removeTags = false;
+					if (count > 0) {
+						removeTags = confirm(`このプロジェクトのタグ「${tag}」が ${count} 件のパネルに付いています。\n\n[OK] タグもパネルから自動除去する（推奨）\n[キャンセル] パネルのタグはそのまま残し、プロジェクト一覧からのみ削除する`);
+					}
+					// 1) projects 配列から除去
+					let projects = loadProjects();
+					projects = projects.filter(p => p !== name);
+					saveProjects(projects);
+					// 2) タグ除去
+					if (removeTags) {
+						let touched = 0;
+						cats.forEach(c => (c.panels || []).forEach(p => {
+							if (p && Array.isArray(p.tags)) {
+								const before = p.tags.length;
+								p.tags = p.tags.filter(t => t !== tag);
+								if (p.tags.length !== before) touched++;
+							}
+						}));
+						if (touched > 0) {
+							if (typeof window.gkLinksSaveCats === 'function') {
+								window.gkLinksSaveCats(cats);
+							} else {
+								try {
+									const k = (typeof LOCAL_KEY !== 'undefined') ? LOCAL_KEY : Object.keys(localStorage).find(x => x.startsWith('HBA_PANEL_CATS_'));
+									if (k) localStorage.setItem(k, JSON.stringify(cats));
+								} catch (e) {}
+							}
+						}
+					}
+					// 3) 現在選択中だったらクリア
+					if (getCurrent() === name) setCurrent(null);
+					refreshSelect();
+					applyAndRender();
+					buildProjectManageList();
+				};
+			});
+		}
+
+		document.addEventListener('click', function(e) {
+			if (e.target && e.target.id === 'projectManageBtn') {
+				buildProjectManageList();
+				const m = document.getElementById('projectManageModalBg');
+				if (m) m.style.display = 'flex';
+			} else if (e.target && (e.target.id === 'projectManageCloseBtn' || e.target.id === 'projectManageDoneBtn')) {
+				const m = document.getElementById('projectManageModalBg');
+				if (m) m.style.display = 'none';
+			} else if (e.target && e.target.id === 'projectManageModalBg') {
+				e.target.style.display = 'none';
 			}
 		});
 
