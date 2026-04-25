@@ -1,0 +1,37 @@
+[
+  {
+    "title": "検索・ポータル",
+    "panels": [
+      { "text": "Google",       "img": "", "url": "https://www.google.co.jp",       "tags": ["検索"] },
+      { "text": "Yahoo! Japan", "img": "", "url": "https://www.yahoo.co.jp",        "tags": ["検索", "ニュース"] },
+      { "text": "Bing",         "img": "", "url": "https://www.bing.com",           "tags": ["検索"] },
+      { "text": "Google マップ", "img": "", "url": "https://maps.google.co.jp",     "tags": ["地図"] }
+    ],
+    "color": "#e6effb",
+    "fontColor": "#1e3a8a"
+  },
+  {
+    "title": "SNS・コミュニティ",
+    "panels": [
+      { "text": "X (Twitter)", "img": "", "url": "https://x.com",           "tags": ["SNS"] },
+      { "text": "note",        "img": "", "url": "https://note.com",        "tags": ["SNS", "ブログ"] },
+      { "text": "Threads",     "img": "", "url": "https://www.threads.net", "tags": ["SNS"] },
+      { "text": "GitHub",      "img": "", "url": "https://github.com",      "tags": ["開発"] },
+      { "text": "Zenn",        "img": "", "url": "https://zenn.dev",        "tags": ["技術", "開発"] },
+      { "text": "Qiita",       "img": "", "url": "https://qiita.com",       "tags": ["技術", "開発"] }
+    ],
+    "color": "#f0fdf4",
+    "fontColor": "#166534"
+  },
+  {
+    "title": "生成AI",
+    "panels": [
+      { "text": "Claude",     "img": "", "url": "https://claude.ai",                    "tags": ["AI"] },
+      { "text": "ChatGPT",   "img": "", "url": "https://chat.openai.com",              "tags": ["AI"] },
+      { "text": "Gemini",    "img": "", "url": "https://gemini.google.com/app?hl=ja",  "tags": ["AI"] },
+      { "text": "NotebookLM","img": "", "url": "https://notebooklm.google.com",        "tags": ["AI"] }
+    ],
+    "color": "#fff7ed",
+    "fontColor": "#92400e"
+  }
+]
