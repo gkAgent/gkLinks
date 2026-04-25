@@ -1,30 +1,21 @@
-gkLinks License (gkAgent Free Use License)
+MIT License
 
 Copyright (c) 2026 gkAgent
 
-このソフトウェア（gkLinks）は、個人利用・商用利用問わず無料でご利用いただけます。
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-【許可される行為】
-- 個人での利用
-- 業務での利用（社内、フリーランス問わず）
-- 改変して個人/業務で使うこと
-- 複数の PC・端末にインストールして使うこと
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-【条件】
-- 再配布する場合、本ライセンスファイル（LICENSE）と著作権表示
-  「Copyright (c) 2026 gkAgent」をそのまま含めてください。
-- 改変したソフトを配布する場合、改変箇所を明示してください。
-
-【免責】
-本ソフトウェアは現状のまま（AS IS）で提供されます。
-利用に伴う一切の損害について、開発者は責任を負いません。
-ローカルストレージのデータ消失等についても、利用者の責任となります。
-
-【商用利用】
-個人事業主・法人問わず無料で業務にご利用いただけます。
-有償サポートが必要な場合は note または GitHub Issues でご相談ください。
-
----
-
-Web: https://gkagent.jp/
-GitHub: https://github.com/gkAgent
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR OTHER DEALINGS IN THE
+SOFTWARE.
