@@ -6,7 +6,7 @@
 	<title>
 		gkLinks — マイリンク管理
 	</title>
-	<meta name="app-version" content="1.7.1">
+	<meta name="app-version" content="1.7.2">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Noto+Sans+JP:400,700&display=swap"
 		rel="stylesheet">
@@ -526,8 +526,12 @@
 			opacity: 0.6;
 		}
 
-		#feedbackBtn {
-			background: var(--menu-btn-bg) !important;
+		/* v1.7.2: feedbackBtn は .action-btn の gold gradient ＋ #0b0e1a 文字色を
+		   そのまま使う。旧 menu-btn-bg(=transparent surface) で覆っていたため、
+		   背景が透けて文字色が dark on dark になり読めなかった不具合を修正。 */
+		#feedbackBtn,
+		#feedbackBtn:hover {
+			color: #0b0e1a !important;
 		}
 
 		#resetAllBtn {
@@ -3296,6 +3300,36 @@
 			color: var(--text);
 		}
 
+		/* v1.7.2: ダーク背景上の <a> リンクをゴールドに統一（既定の青/紫は不可視） */
+		.modal a,
+		.modal-bg a,
+		.tab-panel a,
+		#hiddenVersionHistory a,
+		#feedbackModalBg a,
+		#helpModalBg a {
+			color: var(--gold2) !important;
+			text-decoration: underline;
+			text-decoration-color: rgba(212,175,55,.4);
+			text-underline-offset: 2px;
+			transition: color .15s ease;
+		}
+		.modal a:hover,
+		.modal-bg a:hover,
+		.tab-panel a:hover,
+		#hiddenVersionHistory a:hover,
+		#feedbackModalBg a:hover,
+		#helpModalBg a:hover {
+			color: var(--gold) !important;
+			text-decoration-color: var(--gold);
+		}
+		.modal a:visited,
+		.modal-bg a:visited,
+		.tab-panel a:visited,
+		#feedbackModalBg a:visited,
+		#helpModalBg a:visited {
+			color: var(--gold2) !important;
+		}
+
 		/* AIツールタブ — 先頭の使い方ガイドカード（v1.6.1） */
 		.ai-usage-hint-card {
 			margin: 4px 0 16px;
@@ -4199,6 +4233,7 @@
 	</div>
 	<div id="hiddenVersionHistory" style="display:none;">
   <p style="padding:16px;line-height:1.8;">
+    <strong>ver 1.7.2</strong> — 2026/04/25 — フィードバックリンク等の視認性修正<br>
     <strong>ver 1.7.1</strong> — 2026/04/25 — 律監査による重大バグ修正（タブ stopPropagation 起因のカテゴリ追加・AI/スニペット新規作成不能）<br>
     <strong>ver 1.7.0</strong> — 2026/04/25 — ノートブック・PRタイマー・工数記録・リマインダー<br>
     <strong>ver 1.6.1</strong> — 2026/04/25 — ダークモード視認性全面改善・UX修正<br>
