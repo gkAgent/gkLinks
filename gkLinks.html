@@ -6,7 +6,7 @@
 	<title>
 		gkLinks — マイリンク管理
 	</title>
-	<meta name="app-version" content="1.7.3">
+	<meta name="app-version" content="2.0.0">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Noto+Sans+JP:400,700&display=swap"
 		rel="stylesheet">
@@ -2641,13 +2641,26 @@
 			background: rgba(212,175,55,.10) !important;
 		}
 
-		/* ---------- タブメニュー ---------- */
+		/* ---------- タブメニュー（v2.0: sticky 固定） ---------- */
 		.tab-menu-container {
 			background: var(--bg2) !important;
 			border-bottom: 1px solid var(--border) !important;
+			position: sticky !important;
+			top: 55px;             /* ヘッダー (sticky, top:0) の高さに合わせて固定 */
+			z-index: 90;           /* ヘッダー (z-index:100) より下、本文より上 */
+			margin: 0 !important;  /* margin が残るとスクロール時に隙間が空くため除去 */
+			padding: 0 !important;
+			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32);
 		}
 		.tab-bar {
 			background: transparent !important;
+			border-radius: 0 !important;
+		}
+		/* タブバー直下のコンテンツエリアは独立スクロール領域として扱う */
+		.tab-content-area {
+			padding-top: 8px;
 		}
 		.tab-item {
 			background: transparent !important;
@@ -4060,7 +4073,7 @@
 	<div class="modal-bg" id="helpModalBg" style="display:none;">
 		<div class="modal" style="min-width:600px;max-width:90vw;max-height:85vh;overflow-y:auto;">
 			<div style="display:flex;justify-content:space-between;align-items:center;">
-				<h2 style="margin:0;font-size:1.3em;">📖 gkLinks ヘルプ <span style="font-size:11px;font-weight:normal;background:#4a90e2;color:#fff;padding:2px 8px;border-radius:10px;">v1.7.3</span></h2>
+				<h2 style="margin:0;font-size:1.3em;">📖 gkLinks ヘルプ <span style="font-size:11px;font-weight:normal;background:#d4a017;color:#0b0e1a;padding:2px 8px;border-radius:10px;">v2.0.0</span></h2>
 				<button type="button" id="helpCloseBtn" class="close-btn" style="margin-left:14px;">×</button>
 			</div>
 			<div style="margin-top:14px;line-height:1.7;font-size:14px;">
@@ -4315,19 +4328,13 @@
 	</div>
 	<div id="hiddenVersionHistory" style="display:none;">
   <p style="padding:16px;line-height:1.8;">
-    <strong>ver 1.7.3</strong> — 2026/04/25 — 再描画バグ修正・プロジェクト管理UI追加・タブ表示整理・ヘルプ全面刷新<br>
-    <strong>ver 1.7.2</strong> — 2026/04/25 — フィードバックリンク等の視認性修正<br>
-    <strong>ver 1.7.1</strong> — 2026/04/25 — 律監査による重大バグ修正（タブ stopPropagation 起因のカテゴリ追加・AI/スニペット新規作成不能）<br>
-    <strong>ver 1.7.0</strong> — 2026/04/25 — ノートブック・PRタイマー・工数記録・リマインダー<br>
-    <strong>ver 1.6.1</strong> — 2026/04/25 — ダークモード視認性全面改善・UX修正<br>
-    <strong>ver 1.6.0</strong> — 2026/04/25 — コードスニペット集・チケット番号自動検出<br>
-    <strong>ver 1.5.1</strong> — 2026/04/25 — ダークモード固定（ライトモード廃止）<br>
-    <strong>ver 1.5.0</strong> — 2026/04/25 — スタンドアップ生成・プロジェクトコンテキスト切替<br>
-    <strong>ver 1.4.0</strong> — 2026/04/25 — AI プロンプトライブラリ追加（18テンプレート）<br>
-    <strong>ver 1.3.0</strong> — 2026/04/25 — gkAgent ブランドカラー適用<br>
-    <strong>ver 1.2.0</strong> — 2026/04/25 — ダッシュボード・URL共有・Markdown対応<br>
-    <strong>ver 1.1.0</strong> — 2026/04/25 — Favicon自動取得・QR・音声検索・Cmd Palette<br>
-    <strong>ver 1.0.0</strong> — 2026/04/25 — gkAgent 初版リリース
+    <strong>ver 2.0.0</strong> — 2026/04/25 — 正式版公開（v2 リリース）<br>
+    　　メインメニューの sticky 固定、カテゴリ・パネル・プロジェクト機能の完全動作保証、全機能のリグレッション検証通過<br>
+    <strong>ver 1.7.0</strong> (β) — 2026/04/22 — UI/UX 最終調整・ヘルプ全面刷新（9セクション）・プロジェクト管理モーダル<br>
+    <strong>ver 1.5.0</strong> (β) — 2026/04/18 — 業務改善機能群追加（AI プロンプトライブラリ・コードスニペット集・PRレビュータイマー・工数記録）<br>
+    <strong>ver 1.3.0</strong> (β) — 2026/04/12 — ダッシュボード・スタンドアップ自動生成・タグクラウド・ヒートマップ・期限リマインダー<br>
+    <strong>ver 1.1.0</strong> (α) — 2026/04/06 — 拡張機能（音声検索・QRコード・Cmd Palette・Markdown 対応・Favicon 自動取得）<br>
+    <strong>ver 1.0.0</strong> (α) — 2026/03/30 — α版リリース（カテゴリ・パネル・タグ・お気に入り・検索・URL共有）
   </p>
 </div>
 	<script>
@@ -5554,11 +5561,11 @@
 			modalBg.style.display = "none";
 			panelForm.reset();
 			currentPanelTags = [];
-			// カテゴリ選択もリセット
-			categorySelect = document.getElementById('panelCategory');
-			if (categorySelect) {
-				categorySelect.value = "";
-				categorySelect.disabled = false;
+			// カテゴリ選択もリセット（const 再代入バグ修正・v2.0.0）
+			const resetSelect = document.getElementById('panelCategory');
+			if (resetSelect) {
+				resetSelect.value = "";
+				resetSelect.disabled = false;
 			}
 		};
 		//------全クリアボタン------

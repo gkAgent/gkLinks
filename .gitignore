@@ -6,8 +6,15 @@ SUBMIT_MADONOMORI.md
 Thumbs.db
 # 検証スクリプト・スクリーンショット（律監査時の作業生成物）
 diag*.js
+debug_*.js
+test_sticky.js
+measure_header.js
 verify_*.js
+verify_*_log.txt
+verify_*_result.txt
 screenshot*.js
 screenshots/
 screenshots_github/
 screenshots_hp/
+screenshots_v2_release/
+*.zip
