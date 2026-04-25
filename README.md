@@ -4,6 +4,35 @@
 
 「え？こんなことも HTML 1ファイルでできるの？」と驚かせるのが目的のアプリです。
 
+[![Latest Release](https://img.shields.io/github/v/release/gkAgent/gkLinks?label=Download&color=d4af37)](https://github.com/gkAgent/gkLinks/releases/latest)
+[![License](https://img.shields.io/badge/license-Free-green)](LICENSE)
+[![HTML](https://img.shields.io/badge/Made%20with-HTML%2FJS-orange)]()
+[![Web](https://img.shields.io/badge/web-gkagent.jp-d4af37)](https://gkagent.jp)
+
+---
+
+## スクリーンショット
+
+| メイン画面 | ダッシュボード |
+|---|---|
+| ![main](screenshots/01_main.png) | ![dashboard](screenshots/02_dashboard.png) |
+
+| AIツール | コードスニペット |
+|---|---|
+| ![ai](screenshots/03_ai_tools.png) | ![snippets](screenshots/04_snippets.png) |
+
+| ノートブック | Cmd Palette (Ctrl+K) |
+|---|---|
+| ![notebook](screenshots/05_notebook.png) | ![cmd](screenshots/06_cmd_palette.png) |
+
+---
+
+## ⬇ ダウンロード
+
+最新版：**[gkLinks v1.7.0 (96KB ZIP)](https://github.com/gkAgent/gkLinks/releases/latest/download/gkLinks_v1.7.0.zip)**
+
+ZIP を解凍して `gkLinks.html` をダブルクリックするだけで使えます。
+
 ---
 
 ## 概要
