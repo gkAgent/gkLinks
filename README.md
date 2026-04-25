@@ -131,6 +131,6 @@
 ## 開発元
 
 **gkAgent**
-- Web: https://gkagent.github.io/gkagent-hp/
+- Web: https://gkagent.jp/
 - Note: https://note.com/gkagent
 - Zenn: https://zenn.dev/gk3
