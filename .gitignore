@@ -4,3 +4,10 @@ package-lock.json
 SUBMIT_MADONOMORI.md
 .DS_Store
 Thumbs.db
+# 検証スクリプト・スクリーンショット（律監査時の作業生成物）
+diag*.js
+verify_*.js
+screenshot*.js
+screenshots/
+screenshots_github/
+screenshots_hp/
