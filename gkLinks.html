@@ -88,6 +88,7 @@
 		gap: 20px;
 		width: 100%;
 		box-sizing: border-box;
+		flex-wrap: wrap;
 	}
 
 	header h1 {
@@ -183,8 +184,25 @@
 	}
 
 	@media (max-width: 900px) {
-		.project-context-select { font-size: 0.82em; padding: 6px 26px 6px 10px; }
+		header { gap: 12px; }
+		.header-search-area {
+			flex-basis: 100%;
+			max-width: 100%;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+		}
+		.project-context-wrap {
+			flex-wrap: wrap;
+			flex-shrink: 1;
+			min-width: 0;
+		}
+		.project-context-select { font-size: 0.82em; padding: 6px 26px 6px 10px; max-width: 60vw; }
 		.project-context-badge { display: none !important; }
+	}
+	@media (max-width: 600px) {
+		.search-input-wrapper input { width: 100%; min-width: 0; }
+		.search-input-wrapper { flex: 1 1 100%; }
+		.header-search-area { gap: 8px; }
 	}
 
 	/* 検索フィルターエリア */
