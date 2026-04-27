@@ -3424,6 +3424,210 @@
 		}
 		.project-help-tooltip li { margin: 3px 0; }
 
+	/* =========================================================
+	   テーマ切替 (v2.1.0) — A: Dark Editor / B: Soft Gold(既定) / C: Paper Premium
+	   ========================================================= */
+
+	/* ── テーマ切替ボタン ── */
+	.theme-switcher-btn {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		color: var(--text);
+		border-radius: 8px;
+		padding: 6px 10px;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background 0.2s, border-color 0.2s;
+		flex-shrink: 0;
+	}
+	.theme-switcher-btn:hover { background: var(--menu-btn-hover-bg); border-color: var(--border-hi); }
+
+	/* ── テーマ選択モーダル ── */
+	.theme-modal-overlay {
+		display: none;
+		position: fixed; inset: 0;
+		background: rgba(0,0,0,.6);
+		z-index: 9999;
+		align-items: center;
+		justify-content: center;
+	}
+	.theme-modal-overlay.open { display: flex; }
+	.theme-modal {
+		background: var(--bg2, #0b0e1a);
+		border: 1px solid var(--border-hi, rgba(212,175,55,.35));
+		border-radius: 16px;
+		padding: 24px;
+		width: 340px;
+		max-width: 90vw;
+		box-shadow: 0 20px 60px rgba(0,0,0,.6);
+	}
+	.theme-modal h3 {
+		margin: 0 0 16px;
+		font-size: 14px;
+		font-weight: 700;
+		color: var(--gold, #d4af37);
+		letter-spacing: .08em;
+		text-transform: uppercase;
+	}
+	.theme-options { display: flex; flex-direction: column; gap: 10px; }
+	.theme-option {
+		display: flex; align-items: center; gap: 12px;
+		padding: 12px 14px;
+		border-radius: 10px;
+		border: 1.5px solid transparent;
+		cursor: pointer;
+		transition: border-color 0.2s, background 0.2s;
+		background: rgba(255,255,255,.03);
+	}
+	.theme-option:hover { background: rgba(255,255,255,.06); }
+	.theme-option.active { border-color: var(--gold, #d4af37); }
+	.theme-option-swatch {
+		width: 36px; height: 36px;
+		border-radius: 8px;
+		flex-shrink: 0;
+		border: 1px solid rgba(255,255,255,.15);
+	}
+	.theme-option-name { font-size: 13px; font-weight: 600; color: var(--text, #f0f4f8); }
+	.theme-option-desc { font-size: 11px; color: var(--muted, #64748b); margin-top: 2px; }
+	.theme-modal-close {
+		margin-top: 16px; width: 100%;
+		background: rgba(255,255,255,.06); border: 1px solid var(--border, rgba(255,255,255,.08));
+		color: var(--text, #f0f4f8); border-radius: 8px; padding: 8px; cursor: pointer; font-size: 13px;
+	}
+	.theme-modal-close:hover { background: rgba(255,255,255,.12); }
+
+	/* ── テーマ A: Dark Editor (GitHub Dark Dimmed) ── */
+	[data-theme="a"] {
+		--bg: #22272e;
+		--bg2: #2d333b;
+		--surface: rgba(255,255,255,.06);
+		--border: #444c56;
+		--border-hi: #539bf5;
+		--gold: #539bf5;
+		--gold2: #76b3fa;
+		--text: #cdd9e5;
+		--muted: #768390;
+		--muted2: #adbac7;
+		--shadow-gold: 0 4px 24px rgba(83,155,245,0.2);
+
+		--bg-gradient: #22272e;
+		--header-bg: #2d333b;
+		--header-fg: #cdd9e5;
+		--header-desc-fg: #768390;
+		--main-bg: #22272e;
+
+		--menu-btn-bg: #373e47;
+		--menu-btn-fg: #539bf5;
+		--menu-btn-hover-bg: #444c56;
+		--menu-btn-hover-fg: #76b3fa;
+
+		--dropdown-bg: #2d333b;
+		--dropdown-fg: #cdd9e5;
+		--dropdown-hover-bg: #444c56;
+		--dropdown-hover-fg: #76b3fa;
+
+		--accordion-bg: #2d333b;
+		--accordion-header-bg: #2d333b;
+		--accordion-header-fg: #76b3fa;
+		--accordion-header-border: #444c56;
+		--accordion-header-active-bg: rgba(83,155,245,.12);
+		--accordion-arrow: #539bf5;
+
+		--panel-bg: #2d333b;
+		--panel-border: #444c56;
+		--panel-title-fg: #cdd9e5;
+		--panel-hover-bg: #373e47;
+		--panel-hover-border: #539bf5;
+
+		--modal-bg: #2d333b;
+		--modal-border: #444c56;
+		--modal-label-fg: #76b3fa;
+		--modal-input-bg: #22272e;
+		--modal-input-border: #444c56;
+		--modal-btn-bg: #347d39;
+		--modal-btn-hover-bg: #46954a;
+
+		--tag-bg: rgba(83,155,245,.12);
+		--tag-fg: #76b3fa;
+		--tag-border: rgba(83,155,245,.4);
+		--tag-selected-bg: #316dca;
+		--tag-selected-fg: #fff;
+	}
+
+	/* ── テーマ C: Paper Premium (上質ライト) ── */
+	[data-theme="c"] {
+		--bg: #f5ecd5;
+		--bg2: #ede0c4;
+		--surface: rgba(74,61,44,.06);
+		--border: rgba(74,61,44,.18);
+		--border-hi: #4a3d2c;
+		--gold: #8b1a1a;
+		--gold2: #a82424;
+		--blue: #2d4db3;
+		--text: #3a2e20;
+		--muted: #6b5840;
+		--muted2: #7a6852;
+		--shadow-gold: 0 4px 16px rgba(74,61,44,.12);
+
+		--bg-gradient: linear-gradient(180deg, #f7f0df 0%, #f1e7cf 100%);
+		--header-bg: rgba(255,253,245,.9);
+		--header-fg: #3a2e20;
+		--header-desc-fg: #6b5840;
+		--main-bg: #f5ecd5;
+
+		--menu-btn-bg: rgba(255,253,245,.8);
+		--menu-btn-fg: #4a3d2c;
+		--menu-btn-hover-bg: rgba(74,61,44,.08);
+		--menu-btn-hover-fg: #3a2e20;
+		--menu-btn-shadow: 0 2px 8px rgba(74,61,44,.1);
+		--menu-btn-hover-shadow: 0 4px 14px rgba(74,61,44,.18);
+
+		--dropdown-bg: #f1e7cf;
+		--dropdown-fg: #3a2e20;
+		--dropdown-hover-bg: rgba(74,61,44,.08);
+		--dropdown-hover-fg: #3a2e20;
+
+		--version-btn-bg: rgba(74,61,44,.06);
+		--version-btn-fg: #3a2e20;
+		--version-btn-hover-bg: rgba(74,61,44,.12);
+
+		--accordion-bg: #ede0c4;
+		--accordion-header-bg: #e6d5b5;
+		--accordion-header-fg: #4a3d2c;
+		--accordion-header-border: rgba(74,61,44,.2);
+		--accordion-header-active-bg: rgba(74,61,44,.08);
+		--accordion-arrow: #4a3d2c;
+
+		--panel-bg: rgba(255,253,245,.75);
+		--panel-border: rgba(74,61,44,.18);
+		--panel-title-fg: #3a2e20;
+		--panel-hover-bg: rgba(255,253,245,.95);
+		--panel-hover-border: #4a3d2c;
+
+		--edbtn-bg: rgba(74,61,44,.06);
+		--edbtn-fg: #4a3d2c;
+		--edbtn-hover-bg: rgba(74,61,44,.14);
+
+		--modal-bg: #f7f0df;
+		--modal-border: rgba(74,61,44,.3);
+		--modal-label-fg: #4a3d2c;
+		--modal-input-bg: rgba(255,255,255,.6);
+		--modal-input-border: rgba(74,61,44,.2);
+		--modal-btn-bg: #8b1a1a;
+		--modal-btn-hover-bg: #a82424;
+		--modal-close-btn-bg: rgba(74,61,44,.06);
+		--modal-close-btn-hover-bg: rgba(74,61,44,.12);
+
+		--tag-bg: rgba(74,61,44,.08);
+		--tag-fg: #4a3d2c;
+		--tag-border: rgba(74,61,44,.3);
+		--tag-hover-bg: rgba(74,61,44,.14);
+		--tag-selected-bg: #8b1a1a;
+		--tag-selected-fg: #f7f0df;
+	}
+	/* Paper テーマ: body の背景に罫線を入れる */
+	[data-theme="c"] body { background: repeating-linear-gradient(180deg, transparent 0px, transparent 27px, rgba(120,90,50,.05) 28px), var(--bg-gradient); }
+
 	</style>
 </head>
 
@@ -3478,8 +3682,42 @@
 				</div>
 			</div>
 		</div>
-		
+
+		<!-- テーマ切替ボタン (v2.1.0) -->
+		<button class="theme-switcher-btn" id="themeSwitcherBtn" title="テーマを切替">🎨</button>
+
 	</header>
+
+	<!-- テーマ選択モーダル -->
+	<div class="theme-modal-overlay" id="themeModalOverlay">
+		<div class="theme-modal">
+			<h3>テーマを選択</h3>
+			<div class="theme-options">
+				<div class="theme-option" data-theme-id="a">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#22272e 50%,#2d333b 50%)"></div>
+					<div>
+						<div class="theme-option-name">A — Dark Editor</div>
+						<div class="theme-option-desc">GitHub Dimmed 系・コード親和性</div>
+					</div>
+				</div>
+				<div class="theme-option active" data-theme-id="">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#0f1419 50%,#d4af37 50%)"></div>
+					<div>
+						<div class="theme-option-name">B — Soft Gold（推奨）</div>
+						<div class="theme-option-desc">gkAgent ブランド・落ち着いた金茶</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="c">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#f7f0df 50%,#4a3d2c 50%)"></div>
+					<div>
+						<div class="theme-option-name">C — Paper Premium</div>
+						<div class="theme-option-desc">上質ライト・万年筆ノート感</div>
+					</div>
+				</div>
+			</div>
+			<button class="theme-modal-close" id="themeModalClose">閉じる</button>
+		</div>
+	</div>
 
 	<!-- タブメニュー -->
 	<div class="tab-menu-container">
@@ -10416,6 +10654,47 @@ panelTagsInput.oninput = function() {
 		// 初回（catList ロード後）
 		setTimeout(renderDueList, 400);
 		console.log('機能4完成: タスクリマインダー（パネル期限）');
+	})();
+
+	// =========================================================
+	// テーマ切替 v2.1.0 (A: Dark Editor / B: Soft Gold / C: Paper)
+	// =========================================================
+	(function() {
+		const STORAGE_KEY = 'gklinks_theme';
+		const btn    = document.getElementById('themeSwitcherBtn');
+		const overlay = document.getElementById('themeModalOverlay');
+		const closeBtn = document.getElementById('themeModalClose');
+		const options  = document.querySelectorAll('.theme-option');
+
+		function applyTheme(themeId) {
+			const html = document.documentElement;
+			if (themeId) {
+				html.setAttribute('data-theme', themeId);
+			} else {
+				html.removeAttribute('data-theme');
+			}
+			localStorage.setItem(STORAGE_KEY, themeId || '');
+			options.forEach(opt => {
+				opt.classList.toggle('active', opt.dataset.themeId === themeId);
+			});
+		}
+
+		// 起動時に保存テーマを復元
+		const saved = localStorage.getItem(STORAGE_KEY) || '';
+		applyTheme(saved);
+
+		btn.addEventListener('click', () => overlay.classList.add('open'));
+		closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+		overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+
+		options.forEach(opt => {
+			opt.addEventListener('click', () => {
+				applyTheme(opt.dataset.themeId || '');
+				setTimeout(() => overlay.classList.remove('open'), 200);
+			});
+		});
+
+		console.log('gkLinks テーマ切替 v2.1.0 初期化完了 (現在: ' + (saved || 'B Soft Gold') + ')');
 	})();
 
 	</script>
