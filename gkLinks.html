@@ -183,8 +183,9 @@
 		background: rgba(20, 20, 30, 0.9);
 	}
 
-	/* 1200px 以下: header の上下2段化 (search-area を独立行に・3 input 横並び) */
-	@media (max-width: 1200px) {
+	/* 1500px 以下: header の上下2段化 (search-area を独立行に・3 input 横並び) */
+	/* 1440px の標準ノートPC でもプロジェクトと検索の被りを防ぐため広めの境界 */
+	@media (max-width: 1500px) {
 		header { row-gap: 8px; }
 		.header-search-area {
 			order: 99;                /* search-area を最後に＝強制的に下段 */
@@ -3653,6 +3654,300 @@
 	/* Paper テーマ: body の背景に罫線を入れる */
 	[data-theme="c"] body { background: repeating-linear-gradient(180deg, transparent 0px, transparent 27px, rgba(120,90,50,.05) 28px), var(--bg-gradient); }
 
+	/* ── テーマ D: Light (Notion風・標準ライト) ── */
+	[data-theme="d"] {
+		--bg: #ffffff;
+		--bg2: #f7f7f5;
+		--surface: rgba(0,0,0,.04);
+		--border: #e0e0e0;
+		--border-hi: #0066cc;
+		--gold: #0066cc;
+		--gold2: #1976d2;
+		--text: #1d1d1f;
+		--muted: #6e6e73;
+		--muted2: #86868b;
+		--shadow-gold: 0 2px 8px rgba(0,102,204,.15);
+
+		--bg-gradient: #ffffff;
+		--header-bg: #f7f7f5;
+		--header-fg: #1d1d1f;
+		--header-desc-fg: #6e6e73;
+		--main-bg: #ffffff;
+
+		--menu-btn-bg: #f0f0ee;
+		--menu-btn-fg: #1d1d1f;
+		--menu-btn-hover-bg: #e8e8e6;
+		--menu-btn-hover-fg: #0066cc;
+		--menu-btn-shadow: 0 1px 3px rgba(0,0,0,.08);
+		--menu-btn-hover-shadow: 0 2px 6px rgba(0,0,0,.12);
+
+		--dropdown-bg: #ffffff;
+		--dropdown-fg: #1d1d1f;
+		--dropdown-hover-bg: #f0f0ee;
+		--dropdown-hover-fg: #0066cc;
+
+		--accordion-bg: #f7f7f5;
+		--accordion-header-bg: #f0f0ee;
+		--accordion-header-fg: #1d1d1f;
+		--accordion-header-border: #e0e0e0;
+		--accordion-header-active-bg: rgba(0,102,204,.06);
+		--accordion-arrow: #0066cc;
+
+		--panel-bg: #ffffff;
+		--panel-border: #e0e0e0;
+		--panel-title-fg: #1d1d1f;
+		--panel-hover-bg: #f7f7f5;
+		--panel-hover-border: #0066cc;
+
+		--modal-bg: #ffffff;
+		--modal-border: #e0e0e0;
+		--modal-label-fg: #1d1d1f;
+		--modal-input-bg: #f7f7f5;
+		--modal-input-border: #e0e0e0;
+		--modal-btn-bg: #0066cc;
+		--modal-btn-hover-bg: #1976d2;
+
+		--tag-bg: rgba(0,102,204,.08);
+		--tag-fg: #0066cc;
+		--tag-border: rgba(0,102,204,.2);
+		--tag-selected-bg: #0066cc;
+		--tag-selected-fg: #fff;
+	}
+
+	/* ── テーマ E: Forest (緑系・自然) ── */
+	[data-theme="e"] {
+		--bg: #1a2e1a;
+		--bg2: #243a24;
+		--surface: rgba(255,255,255,.05);
+		--border: #3a5a3a;
+		--border-hi: #4caf50;
+		--gold: #4caf50;
+		--gold2: #66bb6a;
+		--text: #e8f0e8;
+		--muted: #9ab59a;
+		--muted2: #b8ccb8;
+		--shadow-gold: 0 4px 16px rgba(76,175,80,.25);
+
+		--bg-gradient: linear-gradient(180deg, #1a2e1a 0%, #243a24 100%);
+		--header-bg: #243a24;
+		--header-fg: #e8f0e8;
+		--header-desc-fg: #9ab59a;
+		--main-bg: #1a2e1a;
+
+		--menu-btn-bg: #2d4a2d;
+		--menu-btn-fg: #c5e1c5;
+		--menu-btn-hover-bg: #3a5a3a;
+		--menu-btn-hover-fg: #4caf50;
+
+		--dropdown-bg: #243a24;
+		--dropdown-fg: #e8f0e8;
+		--dropdown-hover-bg: #3a5a3a;
+		--dropdown-hover-fg: #4caf50;
+
+		--accordion-bg: #243a24;
+		--accordion-header-bg: #2d4a2d;
+		--accordion-header-fg: #4caf50;
+		--accordion-header-border: #3a5a3a;
+		--accordion-header-active-bg: rgba(76,175,80,.15);
+		--accordion-arrow: #4caf50;
+
+		--panel-bg: #2d4a2d;
+		--panel-border: #3a5a3a;
+		--panel-title-fg: #e8f0e8;
+		--panel-hover-bg: #3a5a3a;
+		--panel-hover-border: #4caf50;
+
+		--modal-bg: #243a24;
+		--modal-border: #3a5a3a;
+		--modal-label-fg: #4caf50;
+		--modal-input-bg: #1a2e1a;
+		--modal-input-border: #3a5a3a;
+		--modal-btn-bg: #4caf50;
+		--modal-btn-hover-bg: #66bb6a;
+
+		--tag-bg: rgba(76,175,80,.15);
+		--tag-fg: #66bb6a;
+		--tag-border: rgba(76,175,80,.4);
+		--tag-selected-bg: #4caf50;
+		--tag-selected-fg: #fff;
+	}
+
+	/* ── テーマ F: Ocean (青系・冷静) ── */
+	[data-theme="f"] {
+		--bg: #0a1929;
+		--bg2: #132f4c;
+		--surface: rgba(255,255,255,.05);
+		--border: #1e4976;
+		--border-hi: #2196f3;
+		--gold: #2196f3;
+		--gold2: #42a5f5;
+		--text: #b3d4ff;
+		--muted: #6b8eb5;
+		--muted2: #8ba9c9;
+		--shadow-gold: 0 4px 16px rgba(33,150,243,.25);
+
+		--bg-gradient: linear-gradient(180deg, #0a1929 0%, #132f4c 100%);
+		--header-bg: #132f4c;
+		--header-fg: #b3d4ff;
+		--header-desc-fg: #6b8eb5;
+		--main-bg: #0a1929;
+
+		--menu-btn-bg: #1a3a5a;
+		--menu-btn-fg: #b3d4ff;
+		--menu-btn-hover-bg: #1e4976;
+		--menu-btn-hover-fg: #42a5f5;
+
+		--dropdown-bg: #132f4c;
+		--dropdown-fg: #b3d4ff;
+		--dropdown-hover-bg: #1e4976;
+		--dropdown-hover-fg: #42a5f5;
+
+		--accordion-bg: #132f4c;
+		--accordion-header-bg: #1a3a5a;
+		--accordion-header-fg: #42a5f5;
+		--accordion-header-border: #1e4976;
+		--accordion-header-active-bg: rgba(33,150,243,.15);
+		--accordion-arrow: #2196f3;
+
+		--panel-bg: #1a3a5a;
+		--panel-border: #1e4976;
+		--panel-title-fg: #b3d4ff;
+		--panel-hover-bg: #1e4976;
+		--panel-hover-border: #2196f3;
+
+		--modal-bg: #132f4c;
+		--modal-border: #1e4976;
+		--modal-label-fg: #42a5f5;
+		--modal-input-bg: #0a1929;
+		--modal-input-border: #1e4976;
+		--modal-btn-bg: #2196f3;
+		--modal-btn-hover-bg: #42a5f5;
+
+		--tag-bg: rgba(33,150,243,.15);
+		--tag-fg: #42a5f5;
+		--tag-border: rgba(33,150,243,.4);
+		--tag-selected-bg: #2196f3;
+		--tag-selected-fg: #fff;
+	}
+
+	/* ── テーマ G: Cyber (ネオンサイバー) ── */
+	[data-theme="g"] {
+		--bg: #0d0221;
+		--bg2: #1a0033;
+		--surface: rgba(255,0,255,.05);
+		--border: #4a0080;
+		--border-hi: #00ffff;
+		--gold: #ff00ff;
+		--gold2: #ff66ff;
+		--text: #e0d0ff;
+		--muted: #9070c0;
+		--muted2: #b090e0;
+		--shadow-gold: 0 4px 24px rgba(255,0,255,.4);
+
+		--bg-gradient: linear-gradient(135deg, #0d0221 0%, #1a0033 100%);
+		--header-bg: #1a0033;
+		--header-fg: #ff00ff;
+		--header-desc-fg: #9070c0;
+		--main-bg: #0d0221;
+
+		--menu-btn-bg: #2a0050;
+		--menu-btn-fg: #00ffff;
+		--menu-btn-hover-bg: #4a0080;
+		--menu-btn-hover-fg: #ff00ff;
+
+		--dropdown-bg: #1a0033;
+		--dropdown-fg: #e0d0ff;
+		--dropdown-hover-bg: #4a0080;
+		--dropdown-hover-fg: #00ffff;
+
+		--accordion-bg: #1a0033;
+		--accordion-header-bg: #2a0050;
+		--accordion-header-fg: #00ffff;
+		--accordion-header-border: #4a0080;
+		--accordion-header-active-bg: rgba(255,0,255,.15);
+		--accordion-arrow: #00ffff;
+
+		--panel-bg: #2a0050;
+		--panel-border: #4a0080;
+		--panel-title-fg: #00ffff;
+		--panel-hover-bg: #3a0070;
+		--panel-hover-border: #ff00ff;
+
+		--modal-bg: #1a0033;
+		--modal-border: #4a0080;
+		--modal-label-fg: #00ffff;
+		--modal-input-bg: #0d0221;
+		--modal-input-border: #4a0080;
+		--modal-btn-bg: #ff00ff;
+		--modal-btn-hover-bg: #ff66ff;
+
+		--tag-bg: rgba(0,255,255,.12);
+		--tag-fg: #00ffff;
+		--tag-border: rgba(0,255,255,.4);
+		--tag-selected-bg: #ff00ff;
+		--tag-selected-fg: #0d0221;
+	}
+
+	/* ── テーマ H: Sakura (桜・春・日本) ── */
+	[data-theme="h"] {
+		--bg: #fff5f7;
+		--bg2: #ffe5ec;
+		--surface: rgba(255,105,180,.05);
+		--border: #f8c8d8;
+		--border-hi: #d63384;
+		--gold: #d63384;
+		--gold2: #e85a9c;
+		--text: #4a2c2c;
+		--muted: #8b6c6c;
+		--muted2: #a98888;
+		--shadow-gold: 0 4px 16px rgba(214,51,132,.18);
+
+		--bg-gradient: linear-gradient(180deg, #fff5f7 0%, #ffe5ec 100%);
+		--header-bg: rgba(255,245,247,.9);
+		--header-fg: #4a2c2c;
+		--header-desc-fg: #8b6c6c;
+		--main-bg: #fff5f7;
+
+		--menu-btn-bg: #ffe5ec;
+		--menu-btn-fg: #4a2c2c;
+		--menu-btn-hover-bg: #fbd5e0;
+		--menu-btn-hover-fg: #d63384;
+		--menu-btn-shadow: 0 1px 4px rgba(214,51,132,.1);
+		--menu-btn-hover-shadow: 0 2px 8px rgba(214,51,132,.18);
+
+		--dropdown-bg: #fff5f7;
+		--dropdown-fg: #4a2c2c;
+		--dropdown-hover-bg: #ffe5ec;
+		--dropdown-hover-fg: #d63384;
+
+		--accordion-bg: #ffe5ec;
+		--accordion-header-bg: #fbd5e0;
+		--accordion-header-fg: #4a2c2c;
+		--accordion-header-border: #f8c8d8;
+		--accordion-header-active-bg: rgba(214,51,132,.08);
+		--accordion-arrow: #d63384;
+
+		--panel-bg: #fff5f7;
+		--panel-border: #f8c8d8;
+		--panel-title-fg: #4a2c2c;
+		--panel-hover-bg: #fbd5e0;
+		--panel-hover-border: #d63384;
+
+		--modal-bg: #fff5f7;
+		--modal-border: #f8c8d8;
+		--modal-label-fg: #4a2c2c;
+		--modal-input-bg: rgba(255,255,255,.7);
+		--modal-input-border: #f8c8d8;
+		--modal-btn-bg: #d63384;
+		--modal-btn-hover-bg: #e85a9c;
+
+		--tag-bg: rgba(214,51,132,.08);
+		--tag-fg: #d63384;
+		--tag-border: rgba(214,51,132,.3);
+		--tag-selected-bg: #d63384;
+		--tag-selected-fg: #fff5f7;
+	}
+
 	</style>
 </head>
 
@@ -3737,6 +4032,41 @@
 					<div>
 						<div class="theme-option-name">C — Paper Premium</div>
 						<div class="theme-option-desc">上質ライト・万年筆ノート感</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="d">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#ffffff 50%,#0066cc 50%)"></div>
+					<div>
+						<div class="theme-option-name">D — Light</div>
+						<div class="theme-option-desc">純白・Notion 風・標準ライト</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="e">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#1a2e1a 50%,#4caf50 50%)"></div>
+					<div>
+						<div class="theme-option-name">E — Forest</div>
+						<div class="theme-option-desc">緑系・自然・落ち着き</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="f">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#0a1929 50%,#2196f3 50%)"></div>
+					<div>
+						<div class="theme-option-name">F — Ocean</div>
+						<div class="theme-option-desc">青系・冷静・知的</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="g">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#0d0221 50%,#ff00ff 50%)"></div>
+					<div>
+						<div class="theme-option-name">G — Cyber</div>
+						<div class="theme-option-desc">ネオンサイバー・派手系</div>
+					</div>
+				</div>
+				<div class="theme-option" data-theme-id="h">
+					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#fff5f7 50%,#d63384 50%)"></div>
+					<div>
+						<div class="theme-option-name">H — Sakura</div>
+						<div class="theme-option-desc">桜・春・日本</div>
 					</div>
 				</div>
 			</div>
