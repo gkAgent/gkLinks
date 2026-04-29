@@ -13,9 +13,10 @@ verify_*.js
 verify_*_log.txt
 verify_*_result.txt
 screenshot*.js
-screenshots/
 screenshots_github/
 screenshots_hp/
 screenshots_v2_release/
 screenshots_note_article/
+screenshots_responsive/
+screenshots_themes/
 *.zip
