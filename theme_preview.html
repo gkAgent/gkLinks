@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>gkLinks デザイン試作 3 案見比べ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Noto+Sans+JP:400,500,700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    background: #14161a;
+    color: #e9eafc;
+    padding: 32px 16px;
+    line-height: 1.6;
+  }
+  h1.page-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #f5f1e0;
+  }
+  p.page-sub {
+    text-align: center;
+    color: rgba(233,234,252,.6);
+    margin-bottom: 36px;
+    font-size: 13px;
+  }
+
+  /* ========== レイアウト ========== */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .theme-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+  }
+  .theme-label {
+    padding: 14px 16px;
+    background: #1a1d24;
+    color: #f5f1e0;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .theme-label small {
+    display: block;
+    font-weight: 400;
+    font-size: 11px;
+    color: rgba(245,241,224,.55);
+    margin-top: 2px;
+    letter-spacing: .03em;
+  }
+  .theme-body {
+    padding: 0;
+    min-height: 460px;
+    position: relative;
+  }
+
+  /* ========== 共通モック UI ========== */
+  .mock-app {
+    height: 460px;
+    display: grid;
+    grid-template-rows: 56px 1fr;
+    grid-template-columns: 60px 1fr;
+    overflow: hidden;
+  }
+  .mock-header {
+    grid-column: 1 / 3;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .mock-logo {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .mock-title {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .03em;
+  }
+  .mock-search {
+    margin-left: auto;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 12px;
+    width: 160px;
+  }
+  .mock-sidebar {
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .mock-side-btn {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .mock-main {
+    padding: 16px;
+    overflow: auto;
+  }
+  .mock-section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .mock-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .mock-card {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .mock-card-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .mock-card-desc {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .mock-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .mock-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .mock-code {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-family: "Consolas", "Cascadia Code", monospace;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* ============================================== */
+  /* THEME A — Dark Editor (GitHub Dark Dimmed 系)    */
+  /* ============================================== */
+  .theme-a .theme-body { background: #22272e; color: #adbac7; }
+  .theme-a .mock-header { background: #2d333b; border-bottom: 1px solid #444c56; }
+  .theme-a .mock-logo { background: #316dca; color: #fff; }
+  .theme-a .mock-title { color: #cdd9e5; }
+  .theme-a .mock-search { background: #1c2128; color: #adbac7; border: 1px solid #444c56; }
+  .theme-a .mock-sidebar { background: #2d333b; }
+  .theme-a .mock-side-btn { background: transparent; color: #768390; }
+  .theme-a .mock-side-btn:hover { background: #444c56; color: #cdd9e5; }
+  .theme-a .mock-side-btn.active { background: #316dca33; color: #539bf5; }
+  .theme-a .mock-main { background: #22272e; }
+  .theme-a .mock-section-title { color: #768390; }
+  .theme-a .mock-card { background: #2d333b; border: 1px solid #444c56; color: #adbac7; }
+  .theme-a .mock-card-title { color: #cdd9e5; }
+  .theme-a .mock-card-desc { color: #768390; }
+  .theme-a .mock-btn-primary { background: #347d39; color: #fff; }
+  .theme-a .mock-btn-secondary { background: #373e47; color: #cdd9e5; border: 1px solid #444c56; }
+  .theme-a .mock-code { background: #1c2128; color: #adbac7; border: 1px solid #444c56; }
+
+  /* ============================================== */
+  /* THEME B — Soft Gold (今の路線を弱めた版)        */
+  /* ============================================== */
+  .theme-b .theme-body {
+    background: linear-gradient(160deg, #0f1419 0%, #161b24 100%);
+    color: #e6dcc4;
+  }
+  .theme-b .mock-header {
+    background: rgba(0,0,0,.25);
+    border-bottom: 1px solid rgba(184, 148, 31, .18);
+  }
+  .theme-b .mock-logo {
+    background: #b8941f;
+    color: #0f1419;
+  }
+  .theme-b .mock-title { color: #b8941f; }
+  .theme-b .mock-search {
+    background: rgba(255,255,255,.04);
+    color: #e6dcc4;
+    border: 1px solid rgba(184,148,31,.18);
+  }
+  .theme-b .mock-sidebar { background: rgba(0,0,0,.18); }
+  .theme-b .mock-side-btn { background: transparent; color: rgba(230,220,196,.55); }
+  .theme-b .mock-side-btn:hover { background: rgba(184,148,31,.08); color: #b8941f; }
+  .theme-b .mock-side-btn.active { background: rgba(184,148,31,.12); color: #d4af37; }
+  .theme-b .mock-main { background: transparent; }
+  .theme-b .mock-section-title { color: rgba(230,220,196,.5); }
+  .theme-b .mock-card {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(184,148,31,.12);
+    color: #e6dcc4;
+  }
+  .theme-b .mock-card-title { color: #b8941f; }
+  .theme-b .mock-card-desc { color: rgba(230,220,196,.65); }
+  .theme-b .mock-btn-primary { background: #b8941f; color: #0f1419; }
+  .theme-b .mock-btn-secondary {
+    background: transparent;
+    color: #b8941f;
+    border: 1px solid rgba(184,148,31,.35);
+  }
+  .theme-b .mock-code {
+    background: rgba(0,0,0,.35);
+    color: #c9b88a;
+    border: 1px solid rgba(184,148,31,.15);
+  }
+
+  /* ============================================== */
+  /* THEME C — Paper Premium (上質ライト・和紙風)    */
+  /* ============================================== */
+  .theme-c .theme-body {
+    background:
+      repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 27px,
+        rgba(120, 90, 50, .06) 28px
+      ),
+      linear-gradient(180deg, #f7f0df 0%, #f1e7cf 100%);
+    color: #3a2e20;
+    font-family: "Crimson Text", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  .theme-c .mock-header {
+    background: rgba(255,253,245,.65);
+    border-bottom: 1.5px solid #4a3d2c;
+  }
+  .theme-c .mock-logo {
+    background: #4a3d2c;
+    color: #f1e7cf;
+    font-family: "Crimson Text", serif;
+  }
+  .theme-c .mock-title { color: #4a3d2c; font-weight: 600; }
+  .theme-c .mock-search {
+    background: rgba(255,255,255,.5);
+    color: #3a2e20;
+    border: 1px solid rgba(74,61,44,.25);
+    font-family: inherit;
+  }
+  .theme-c .mock-sidebar {
+    background: rgba(74,61,44,.05);
+    border-right: 1px solid rgba(74,61,44,.1);
+  }
+  .theme-c .mock-side-btn { background: transparent; color: #6b5840; }
+  .theme-c .mock-side-btn:hover { background: rgba(74,61,44,.08); color: #3a2e20; }
+  .theme-c .mock-side-btn.active { background: #4a3d2c; color: #f1e7cf; }
+  .theme-c .mock-main { background: transparent; }
+  .theme-c .mock-section-title {
+    color: #6b5840;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(74,61,44,.15);
+    padding-bottom: 6px;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+  }
+  .theme-c .mock-card {
+    background: rgba(255,253,245,.7);
+    border: 1px solid rgba(74,61,44,.2);
+    color: #3a2e20;
+    box-shadow: 0 1px 3px rgba(74,61,44,.08);
+  }
+  .theme-c .mock-card-title { color: #4a3d2c; font-weight: 600; }
+  .theme-c .mock-card-desc { color: #6b5840; font-family: -apple-system, sans-serif; font-size: 11px; }
+  .theme-c .mock-btn-primary {
+    background: #8b1a1a;
+    color: #f1e7cf;
+    font-family: -apple-system, sans-serif;
+  }
+  .theme-c .mock-btn-secondary {
+    background: transparent;
+    color: #4a3d2c;
+    border: 1.5px solid #4a3d2c;
+    font-family: -apple-system, sans-serif;
+  }
+  .theme-c .mock-code {
+    background: rgba(255,253,245,.85);
+    color: #3a2e20;
+    border: 1px solid rgba(74,61,44,.2);
+  }
+
+  /* 説明欄 */
+  .theme-note {
+    padding: 14px 16px;
+    background: #1a1d24;
+    color: rgba(245,241,224,.7);
+    font-size: 12px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .theme-note strong { color: #f5f1e0; }
+  .pros { color: #6ee7b7; }
+  .cons { color: #fda4af; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">gkLinks デザイン試作 3 案見比べ</h1>
+<p class="page-sub">同じモック UI を 3 つのテーマで表示。Header / Sidebar / Card / Button / Code Block を共通配置で比較できます。</p>
+
+<div class="preview-grid">
+
+  <!-- ============= THEME A ============= -->
+  <div class="theme-card theme-a">
+    <div class="theme-label">案 A: Dark Editor 系
+      <small>GitHub Dark Dimmed / VS Code Dark+ の系譜・エンジニアの仕事道具感</small>
+    </div>
+    <div class="theme-body">
+      <div class="mock-app">
+        <div class="mock-header">
+          <div class="mock-logo">L</div>
+          <div class="mock-title">gkLinks</div>
+          <input class="mock-search" placeholder="検索...">
+        </div>
+        <div class="mock-sidebar">
+          <div class="mock-side-btn active">★</div>
+          <div class="mock-side-btn">⚡</div>
+          <div class="mock-side-btn">💻</div>
+          <div class="mock-side-btn">⏱</div>
+          <div class="mock-side-btn">📓</div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-section-title">FAVORITES</div>
+          <div class="mock-card-grid">
+            <div class="mock-card">
+              <div class="mock-card-title">Anthropic Console</div>
+              <div class="mock-card-desc">claude.ai/console</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">GitHub</div>
+              <div class="mock-card-desc">github.com/gkAgent</div>
+            </div>
+          </div>
+          <div class="mock-buttons">
+            <button class="mock-btn mock-btn-primary">+ 新しいリンク</button>
+            <button class="mock-btn mock-btn-secondary">インポート</button>
+          </div>
+          <div class="mock-code">// snippet sample<br>const ans = await client.messages.create({...});</div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-note">
+      <strong>特徴:</strong> 紺グレー背景 #22272e + 落ち着いた青アクセント #316dca。<br>
+      <span class="pros">○ 長時間でも目が疲れない・コード親和性最強</span><br>
+      <span class="cons">× 他社既製品と差別化しにくい (見たことある感)</span>
+    </div>
+  </div>
+
+  <!-- ============= THEME B ============= -->
+  <div class="theme-card theme-b">
+    <div class="theme-label">案 B: Soft Gold (今の路線を弱めた)
+      <small>金茶を残しつつ彩度ダウン・コントラスト緩和・gkAgent ブランド継続</small>
+    </div>
+    <div class="theme-body">
+      <div class="mock-app">
+        <div class="mock-header">
+          <div class="mock-logo">L</div>
+          <div class="mock-title">gkLinks</div>
+          <input class="mock-search" placeholder="検索...">
+        </div>
+        <div class="mock-sidebar">
+          <div class="mock-side-btn active">★</div>
+          <div class="mock-side-btn">⚡</div>
+          <div class="mock-side-btn">💻</div>
+          <div class="mock-side-btn">⏱</div>
+          <div class="mock-side-btn">📓</div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-section-title">FAVORITES</div>
+          <div class="mock-card-grid">
+            <div class="mock-card">
+              <div class="mock-card-title">Anthropic Console</div>
+              <div class="mock-card-desc">claude.ai/console</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">GitHub</div>
+              <div class="mock-card-desc">github.com/gkAgent</div>
+            </div>
+          </div>
+          <div class="mock-buttons">
+            <button class="mock-btn mock-btn-primary">+ 新しいリンク</button>
+            <button class="mock-btn mock-btn-secondary">インポート</button>
+          </div>
+          <div class="mock-code">// snippet sample<br>const ans = await client.messages.create({...});</div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-note">
+      <strong>特徴:</strong> 黒紺背景 #0f1419 + 落ち着き金 #b8941f (彩度を下げて高級感に振った)。<br>
+      <span class="pros">○ gkAgent ブランド継続・差別化を維持しつつ目疲労軽減</span><br>
+      <span class="cons">× 既存 v2.0 ユーザーには "似てる" と感じられる可能性</span>
+    </div>
+  </div>
+
+  <!-- ============= THEME C ============= -->
+  <div class="theme-card theme-c">
+    <div class="theme-label">案 C: Paper Premium (上質ライト・和紙風)
+      <small>auto-kabushiki 週報ヘッダの系譜・万年筆で書いた仕事ノート感</small>
+    </div>
+    <div class="theme-body">
+      <div class="mock-app">
+        <div class="mock-header">
+          <div class="mock-logo">L</div>
+          <div class="mock-title">gkLinks</div>
+          <input class="mock-search" placeholder="検索...">
+        </div>
+        <div class="mock-sidebar">
+          <div class="mock-side-btn active">★</div>
+          <div class="mock-side-btn">⚡</div>
+          <div class="mock-side-btn">💻</div>
+          <div class="mock-side-btn">⏱</div>
+          <div class="mock-side-btn">📓</div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-section-title">FAVORITES</div>
+          <div class="mock-card-grid">
+            <div class="mock-card">
+              <div class="mock-card-title">Anthropic Console</div>
+              <div class="mock-card-desc">claude.ai/console</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-title">GitHub</div>
+              <div class="mock-card-desc">github.com/gkAgent</div>
+            </div>
+          </div>
+          <div class="mock-buttons">
+            <button class="mock-btn mock-btn-primary">+ 新しいリンク</button>
+            <button class="mock-btn mock-btn-secondary">インポート</button>
+          </div>
+          <div class="mock-code">// snippet sample<br>const ans = await client.messages.create({...});</div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-note">
+      <strong>特徴:</strong> クリーム背景 + 罫線 + 朱印的なアクセント朱 #8b1a1a。本文に Mincho 体を使用。<br>
+      <span class="pros">○ 「仕事できた気分」が一番出る・gkAgent シリーズの語彙統一に効く・ライト系で目が非常にに楽</span><br>
+      <span class="cons">× 暗所/夜利用は反射が眩しい (ダーク版を別途用意する必要)</span>
+    </div>
+  </div>
+
+</div>
+
+<p class="page-sub" style="margin-top: 36px;">
+  気に入った案 (もしくは "B 寄りでアクセントだけ C") を社長へ。決まったら gkLinks.html 本体に反映します。
+</p>
+
+</body>
+</html>
