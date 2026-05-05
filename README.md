@@ -1,4 +1,4 @@
-# gkLinks v2.0.0 — IT 開発者・PM のための万能ブックマーク
+# gkLinks v2.1.3 — IT 開発者・PM のための万能ブックマーク
 
 **サーバー無し・DB 無し・HTML ファイル1つで動く高機能リンク管理アプリ**
 
@@ -29,7 +29,7 @@
 
 ## ⬇ ダウンロード
 
-最新版：**[gkLinks v2.0.0](https://github.com/gkAgent/gkLinks/releases/latest/download/gkLinks_v2.0.0.zip)**
+最新版：**[gkLinks v2.1.3](https://github.com/gkAgent/gkLinks/releases/latest/download/gkLinks_v2.1.3.zip)**
 
 ZIP を解凍して `gkLinks.html` をダブルクリックするだけで使えます。
 
@@ -160,6 +160,9 @@ ZIP を解凍して `gkLinks.html` をダブルクリックするだけで使え
 
 ## バージョン履歴
 
+- **v2.1.3** (2026/05/02) — テーマ B (Soft Gold) を設計書通りの金茶パレットで実装。新規ユーザーは初回起動時に B 適用。既存ユーザーの保存設定（localStorage `gklinks_theme`）はレガシー表示のまま継続
+- **v2.1.2** (2026/04/30) — テーマ拡張（D-Light / E-Forest / F-Ocean / G-Cyber / H-Sakura）追加
+- **v2.1.1** (2026/04/29) — テーマ切替機能を追加（A: Dark Editor / C: Paper Premium）
 - **v2.0.0** (2026/04/25) — 正式版公開（v2 リリース）。タブバー sticky 固定・全機能リグレッションテスト 38/38 PASS
 - **v1.7.0** (2026/04/22) — UI/UX 最終調整・ヘルプ全面刷新
 - **v1.5.0** (2026/04/18) — 業務改善機能群追加（AI/スニペット/PRタイマー/工数）

@@ -6,7 +6,7 @@
 	<title>
 		gkLinks — マイリンク管理
 	</title>
-	<meta name="app-version" content="2.0.0">
+	<meta name="app-version" content="2.1.3">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Noto+Sans+JP:400,700&display=swap"
 		rel="stylesheet">
@@ -3580,6 +3580,80 @@
 		--tag-selected-fg: #fff;
 	}
 
+	/* ── テーマ B: Soft Gold (gkAgent ブランド・落ち着いた金茶) ──
+	   設計書: design_gklinks_b_palette_20260428.md (3 テーマ × 20 主要変数)
+	   既定値の :root (レガシー紺色) は既存ユーザー互換性のため温存
+	   新規ユーザーは初回起動時に B が適用される */
+	[data-theme="b"] {
+		--bg: #0f1419;
+		--bg2: #161b24;
+		--surface: rgba(255,255,255,.04);
+		--border: rgba(184,148,31,.18);
+		--border-hi: rgba(212,175,55,.45);
+		--gold: #b8941f;
+		--gold2: #d4af37;
+		--text: #e6dcc4;
+		--muted: #8a7d60;
+		--muted2: #b0a589;
+		--shadow-gold: 0 4px 20px rgba(184,148,31,.18);
+
+		--bg-gradient: linear-gradient(160deg, #0f1419 0%, #161b24 100%);
+		--header-bg: linear-gradient(135deg, #161b24 0%, #0a0d12 100%);
+		--header-fg: #e6dcc4;
+		--header-desc-fg: rgba(230,220,196,.75);
+		--main-bg: #0f1419;
+
+		--menu-btn-bg: rgba(255,255,255,.04);
+		--menu-btn-fg: #b8941f;
+		--menu-btn-hover-bg: rgba(184,148,31,.08);
+		--menu-btn-hover-fg: #d4af37;
+		--menu-btn-shadow: 0 2px 10px rgba(184,148,31,.12);
+		--menu-btn-hover-shadow: 0 4px 18px rgba(184,148,31,.22);
+
+		--dropdown-bg: #161b24;
+		--dropdown-fg: #e6dcc4;
+		--dropdown-hover-bg: rgba(184,148,31,.08);
+		--dropdown-hover-fg: #d4af37;
+
+		--version-btn-bg: rgba(184,148,31,.08);
+		--version-btn-fg: #e6dcc4;
+		--version-btn-hover-bg: rgba(184,148,31,.16);
+
+		--accordion-bg: #161b24;
+		--accordion-header-bg: #0f1419;
+		--accordion-header-fg: #b8941f;
+		--accordion-header-border: rgba(184,148,31,.18);
+		--accordion-header-active-bg: rgba(184,148,31,.10);
+		--accordion-arrow: #b8941f;
+
+		--panel-bg: rgba(255,255,255,.025);
+		--panel-border: rgba(184,148,31,.12);
+		--panel-title-fg: #b8941f;
+		--panel-hover-bg: rgba(184,148,31,.05);
+		--panel-hover-border: rgba(212,175,55,.45);
+
+		--edbtn-bg: rgba(184,148,31,.08);
+		--edbtn-fg: #d4af37;
+		--edbtn-hover-bg: rgba(184,148,31,.16);
+
+		--modal-bg: #0f1419;
+		--modal-border: rgba(184,148,31,.25);
+		--modal-label-fg: #b8941f;
+		--modal-input-bg: rgba(0,0,0,.35);
+		--modal-input-border: rgba(184,148,31,.18);
+		--modal-btn-bg: #b8941f;
+		--modal-btn-hover-bg: #d4af37;
+		--modal-close-btn-bg: rgba(184,148,31,.10);
+		--modal-close-btn-hover-bg: rgba(184,148,31,.20);
+
+		--tag-bg: rgba(184,148,31,.12);
+		--tag-fg: #d4af37;
+		--tag-border: rgba(184,148,31,.35);
+		--tag-hover-bg: rgba(184,148,31,.20);
+		--tag-selected-bg: #b8941f;
+		--tag-selected-fg: #0f1419;
+	}
+
 	/* ── テーマ C: Paper Premium (上質ライト) ── */
 	[data-theme="c"] {
 		--bg: #f5ecd5;
@@ -4020,7 +4094,7 @@
 						<div class="theme-option-desc">GitHub Dimmed 系・コード親和性</div>
 					</div>
 				</div>
-				<div class="theme-option active" data-theme-id="">
+				<div class="theme-option active" data-theme-id="b">
 					<div class="theme-option-swatch" style="background:linear-gradient(135deg,#0f1419 50%,#d4af37 50%)"></div>
 					<div>
 						<div class="theme-option-name">B — Soft Gold（推奨）</div>
@@ -11012,7 +11086,9 @@ panelTagsInput.oninput = function() {
 	})();
 
 	// =========================================================
-	// テーマ切替 v2.1.0 (A: Dark Editor / B: Soft Gold / C: Paper)
+	// テーマ切替 v2.1.1 (A: Dark Editor / B: Soft Gold / C: Paper / D-H: 拡張テーマ)
+	// 既存ユーザー (空文字保存済) はレガシー :root を継続表示し互換性維持
+	// 新規ユーザー (キー未設定 = null) は B Soft Gold を初期適用
 	// =========================================================
 	(function() {
 		const STORAGE_KEY = 'gklinks_theme';
@@ -11030,12 +11106,16 @@ panelTagsInput.oninput = function() {
 			}
 			localStorage.setItem(STORAGE_KEY, themeId || '');
 			options.forEach(opt => {
-				opt.classList.toggle('active', opt.dataset.themeId === themeId);
+				opt.classList.toggle('active', (opt.dataset.themeId || '') === (themeId || ''));
 			});
 		}
 
 		// 起動時に保存テーマを復元
-		const saved = localStorage.getItem(STORAGE_KEY) || '';
+		// - null (キー未設定 = 新規ユーザー): B Soft Gold 既定
+		// - '' (空文字 = 既存ユーザー): レガシー :root 継続 (互換性維持)
+		// - その他: 保存値をそのまま適用
+		const rawSaved = localStorage.getItem(STORAGE_KEY);
+		const saved = (rawSaved === null) ? 'b' : rawSaved;
 		applyTheme(saved);
 
 		btn.addEventListener('click', () => overlay.classList.add('open'));
@@ -11049,7 +11129,8 @@ panelTagsInput.oninput = function() {
 			});
 		});
 
-		console.log('gkLinks テーマ切替 v2.1.0 初期化完了 (現在: ' + (saved || 'B Soft Gold') + ')');
+		const labelMap = { '': 'Legacy', 'a': 'A Dark Editor', 'b': 'B Soft Gold', 'c': 'C Paper Premium', 'd': 'D Light', 'e': 'E Forest', 'f': 'F Ocean', 'g': 'G Cyber', 'h': 'H Sakura' };
+		console.log('gkLinks テーマ切替 v2.1.1 初期化完了 (現在: ' + (labelMap[saved] || saved) + ')');
 	})();
 
 	</script>
